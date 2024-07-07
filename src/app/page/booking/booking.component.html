@@ -1,0 +1,399 @@
+<main style="padding-top: 90px">
+  <div class="container pt-3">
+    <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+          Nhập thông tin
+        </li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- show info -->
+  <div class="border-top">
+    <div class="container">
+      <div class="row my-3 rounded-3 overflow-hidden text-primary-1">
+        <div class="col-md-4">
+          <img
+            class="w-100 h-100 object-fit-cover"
+            style="
+              border-top-left-radius: 10px;
+              border-bottom-left-radius: 10px;
+            "
+            src="{{ tourdetail.thumnail }}"
+            alt="{{ tourdetail.title }}"
+          />
+        </div>
+        <div class="col-md-8 bg-bg">
+          <div class="d-flex gap-3 align-items-center mt-3">
+            <div
+              class="bg-warning w-fit fs-6 fw-bold py-1 p-3 rounded-2 great text-white"
+            >
+              9
+            </div>
+            <div class="d-flex gap-2 align-items-center">
+              <div class="fw-bold text-primary-1">Tuyệt vời</div>
+              <span class="fs-7 text-primary-1"
+                >{{ tourdetail.like_count }} lượt thích</span
+              >
+            </div>
+          </div>
+          <h4 class="fw-bold mt-4">
+            {{ tourdetail.province_end.name }}: {{ tourdetail.title }}
+          </h4>
+          <div class="mt-3 fs-7 d-flex flex-column gap-2">
+            <div class="d-flex gap-2">
+              <div>Mã tuor:</div>
+              <div class="fw-bold">{{ tourdetail.uuid }}</div>
+            </div>
+            <div class="d-flex gap-2">
+              <div>Khởi hành:</div>
+              <div class="fw-bold">
+                {{ tourdetail.date_start | formatdate }}
+              </div>
+            </div>
+            <div class="d-flex gap-2">
+              <div>Thời gian:</div>
+              <div class="fw-bold">{{ tourdetail.number_of_day }} ngày</div>
+            </div>
+            <div class="d-flex gap-2">
+              <div>Nơi khởi hành:</div>
+              <div class="fw-bold">{{ tourdetail.province_start.name }}</div>
+            </div>
+            <div class="d-flex gap-2">
+              <div>Số chỗ còn nhận:</div>
+              <div class="fw-bold">{{ tourdetail.quantity }}</div>
+            </div>
+            <div class="d-flex gap-2">
+              <div>Gói tour:</div>
+              <i
+                class="fw-bold text-success"
+                style="text-transform: uppercase"
+                >{{ tourdetail.tour_pakage }}</i
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fw-bold fs-4 text-primary-1 mt-2 mb-4">
+        Tổng quan về chuyến đi
+      </div>
+
+      <div class="row text-primary-1">
+        <div class="col-md-7">
+          <div class="fw-bold fs-5 mb-2">Thông tin liên lạc</div>
+          <div class="bg-bg p-4 rounded-3">
+            <div class="row">
+              <div class="col-12 col-md-6 mb-4">
+                <label for=""
+                  >Họ và tên <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="full_name"
+                  [(ngModel)]="orderObj.full_name"
+                />
+                <div>
+                  <small class="text-danger" *ngIf="errorFull_name">{{
+                    errorFull_name
+                  }}</small>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6 mb-3">
+                <label for="">Email <span class="text-danger">*</span></label>
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  [(ngModel)]="orderObj.email"
+                />
+                <div>
+                  <small class="text-danger" *ngIf="errorEmail">{{
+                    errorEmail
+                  }}</small>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6 mb-3">
+                <label for=""
+                  >Số điện thoại <span class="text-danger">*</span></label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  name="phone_number"
+                  [(ngModel)]="orderObj.phone_number"
+                />
+                <div>
+                  <small class="text-danger" *ngIf="errorPhone_number">{{
+                    errorPhone_number
+                  }}</small>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6 mb-3">
+                <label for="">Địa chỉ <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="address"
+                  [(ngModel)]="orderObj.address"
+                />
+                <div>
+                  <small class="text-danger" *ngIf="errorAddress">{{
+                    errorAddress
+                  }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fw-bold fs-5 py-2">Hành khách</div>
+          <div class="row">
+            <div class="col-12 col-md-6 mb-3">
+              <div
+                class="border px-3 py-2 rounded-3 d-flex justify-content-between align-items-center"
+              >
+                <div>
+                  <div class="fw-bold">Người lớn</div>
+                  <span class="fs-7">Từ 12 tuổi trở lên</span>
+                </div>
+                <div class="d-flex gap-2 align-items-center fs-4">
+                  <i
+                    (click)="onChangeQuantity('minus', 'quantity')"
+                    class="fa-solid fa-circle-minus"
+                  ></i>
+                  <div>{{ orderObj.quantity }}</div>
+                  <i
+                    (click)="onChangeQuantity('plus', 'quantity')"
+                    class="fa-solid fa-circle-plus"
+                  ></i>
+                </div>
+              </div>
+              <div>
+                <small class="text-danger" *ngIf="errorQuantity">{{
+                  errorQuantity
+                }}</small>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 mb-4">
+              <div
+                class="border px-3 py-2 rounded-3 d-flex justify-content-between align-items-center"
+              >
+                <div>
+                  <div class="fw-bold">Trẻ em</div>
+                  <span class="fs-7">Từ 2 đến dưới 12 tuổi </span>
+                </div>
+                <div class="d-flex gap-2 align-items-center fs-4">
+                  <i
+                    (click)="onChangeQuantity('minus', 'quantity_child')"
+                    class="fa-solid fa-circle-minus"
+                  ></i>
+                  <div>{{ orderObj.quantity_child }}</div>
+                  <i
+                    (click)="onChangeQuantity('plus', 'quantity_child')"
+                    class="fa-solid fa-circle-plus"
+                  ></i>
+                </div>
+              </div>
+              <div>
+                <small class="text-danger" *ngIf="errorQuantityChild">{{
+                  errorQuantityChild
+                }}</small>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 mb-4">
+              <div
+                class="border px-3 py-2 rounded-3 d-flex justify-content-between align-items-center"
+              >
+                <div>
+                  <div class="fw-bold">Em bé</div>
+                  <span class="fs-7">Dưới 2 tuổi</span>
+                </div>
+                <div class="d-flex gap-2 align-items-center fs-4">
+                  <i
+                    (click)="onChangeQuantity('minus', 'quantity_baby')"
+                    class="fa-solid fa-circle-minus"
+                  ></i>
+                  <div>{{ orderObj.quantity_baby }}</div>
+                  <i
+                    (click)="onChangeQuantity('plus', 'quantity_baby')"
+                    class="fa-solid fa-circle-plus"
+                  ></i>
+                </div>
+              </div>
+              <div>
+                <small class="text-danger" *ngIf="errorQuantityBaby">{{
+                  errorQuantityBaby
+                }}</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="fw-bold fs-5 py-2">Thêm ghi chú</div>
+          <div class="bg-bg p-4">
+            <textarea
+              name="note"
+              class="form-control"
+              placeholder="Nhập thêm chi chú của bạn về chuyến đi"
+              id=""
+              [(ngModel)]="orderObj.note"
+            ></textarea>
+          </div>
+        </div>
+        <div class="col-12 col-md-5">
+          <div class="border rounded-3 py-4 px-3">
+            <div class="fw-bold fs-5 mb-3">Tóm tắt chuyến đi</div>
+            <div class="d-flex gap-2">
+              <div class="fw-bold">Tour trọn gói</div>
+              <span>(1 khách)</span>
+            </div>
+
+            <div class="row my-2">
+              <div class="col-4">
+                <img
+                  class="w-100 h-100 object-fit-cover rounded-4"
+                  src="{{ tourdetail.thumnail }}"
+                  alt=""
+                />
+              </div>
+              <div class="col-8 fw-bold">
+                {{ tourdetail.province_end.name }}: {{ tourdetail.title }}
+              </div>
+            </div>
+
+            <div class="border-dashed-start ps-4 my-3 d-flex flex-column gap-3">
+              <div>
+                <div class="fs-7">Bắt đầu chuyến đi</div>
+                <div class="fw-bold fs-7">
+                  {{ tourdetail.date_start | formatdate }}
+                </div>
+              </div>
+              <div>
+                <div class="fs-7">Kết thúc chuyến đi</div>
+                <div class="fw-bold fs-7">
+                  {{
+                    dateEnd|formatdate
+                  }}
+                  <!-- {{
+                    tourdetail.process_tour[tourdetail.process_tour.length - 1]
+                      .date | formatdate
+                  }} -->
+                </div>
+              </div>
+            </div>
+
+            <div class="py-2 mt-4 border-bottom">
+              <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center gap-1 fw-bold">
+                  <i class="fa-solid fa-people-arrows"></i>
+                  <div>Hành khách</div>
+                </div>
+                <div class="text-danger fw-bold">
+                  {{ tourdetail.price | formatprice }}
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mt-2">
+                <div class="d-flex align-items-center gap-1">
+                  <i
+                    class="fa-solid fa-people-arrows"
+                    style="color: transparent"
+                  ></i>
+                  <div class="fs-7">Người lớn</div>
+                </div>
+                <div class="fw-bold">
+                  {{ orderObj.quantity }} x
+                  {{ tourdetail.price * orderObj.quantity | formatprice }}
+                </div>
+              </div>
+
+              <div
+                class="d-flex justify-content-between mt-2"
+                *ngIf="orderObj.quantity_child > 0"
+              >
+                <div class="d-flex align-items-center gap-1">
+                  <i
+                    class="fa-solid fa-people-arrows"
+                    style="color: transparent"
+                  ></i>
+                  <div class="fs-7">Trẻ em</div>
+                </div>
+                <div class="fw-bold">
+                  {{ orderObj.quantity_child }} x
+                  {{
+                    tourdetail.price_child * orderObj.quantity_child
+                      | formatprice
+                  }}
+                </div>
+              </div>
+
+              <div
+                class="d-flex justify-content-between mt-2"
+                *ngIf="orderObj.quantity_baby > 0"
+              >
+                <div class="d-flex align-items-center gap-1">
+                  <i
+                    class="fa-solid fa-people-arrows"
+                    style="color: transparent"
+                  ></i>
+                  <div class="fs-7">Em bé</div>
+                </div>
+                <div class="fw-bold">
+                  {{ orderObj.quantity_baby }} x
+                  {{
+                    tourdetail.price_baby * orderObj.quantity_baby | formatprice
+                  }}
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between mt-2">
+                <div class="d-flex align-items-center gap-1">
+                  <i
+                    class="fa-solid fa-people-arrows"
+                    style="color: transparent"
+                  ></i>
+                  <div class="fs-7 fw-bold">Phụ thu</div>
+                </div>
+                <div class="fw-bold">
+                  {{ tourdetail.additional_fee | formatprice }}
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3 d-flex justify-content-between align-items-center">
+              <div class="fw-bold">TỔNG TIỀN</div>
+              <div class="text-danger fw-bold fs-4">
+                {{
+                  +tourdetail.price * orderObj.quantity +
+                    +tourdetail.price_child * orderObj.quantity_child +
+                    +tourdetail.price_baby * orderObj.quantity_baby +
+                    +tourdetail.additional_fee | formatprice
+                }}
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <button *ngIf="!loading" (click)="onSubmit()" class="btn btn-danger w-100 fw-bold py-2">
+                Đặt ngay
+              </button>
+              <button *ngIf="loading" disabled class="btn btn-danger w-100 fw-bold py-2">
+                Đặt ngay
+              </button>
+            </div>
+
+            <div class="text-center pt-4">
+              <small class="text-danger" *ngIf="errorMess">{{errorMess}}</small>
+              <small class="text-success" *ngIf="successMess">{{successMess}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

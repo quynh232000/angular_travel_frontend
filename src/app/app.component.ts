@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { StoreService } from './core/services/store.service';
+
 
 @Component({
   selector: 'app-root',
@@ -9,5 +11,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'travel_angular';
+  
 }

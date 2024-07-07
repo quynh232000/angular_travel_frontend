@@ -1,0 +1,315 @@
+<!-- header -->
+<header
+  class="bg-primary text-light position-fixed z-2 top-0 start-0 end-0 shadow-sm"
+>
+  <div class="container py-2">
+    <div class="row">
+      <a [routerLink]="['/']" class="d-flex align-items-center col-4">
+        <img
+          width="84"
+          class="imge-fluid"
+          src="assets/images/logo/logo-white.png"
+          alt=""
+        />
+        <!-- <div class="text-light pt-2 fw-bold px-2">Travel</div> -->
+      </a>
+
+      <nav
+        class="col-8 d-flex justify-content-end text-light nav-laptop d-none d-md-flex"
+      >
+        <a
+          href=""
+          class="btn btn-outline-primary border-0 hover-bg-0 text-light d-flex hover-bg-hover-1"
+        >
+          <div class="fw-medium">VND</div>
+          <img
+            class="ms-2"
+            width="24"
+            src="assets/images/icons/vietnam.png"
+            alt=""
+          />
+        </a>
+        <a
+          href=""
+          class="btn btn-outline-primary border-0 hover-bg-0 text-light d-flex hover-bg-hover-1 d-flex align-items-center gap-2"
+        >
+          <div class="fw-medium">Liên hệ</div>
+          <i class="fa-regular fa-circle-question"></i>
+        </a>
+        <a
+          [routerLink]="['/news']"
+          class="btn btn-outline-primary border-0 hover-bg-0 text-light d-flex hover-bg-hover-1 me-2 d-flex align-items-center gap-2"
+        >
+          <div class="fw-medium">Tin tức</div>
+          <i class="fa-solid fa-satellite-dish"></i>
+        </a>
+        <div class="d-flex gap-2" *ngIf="!isLogin">
+          <a
+            [routerLink]="['/register']"
+            class="btn btn-outline-light btn-sm d-flex align-items-center text-primary fw-bolder rounded-2 bg-light"
+            >Đăng ký</a
+          >
+          <a
+            [routerLink]="['/login']"
+            class="btn btn-outline-light btn-sm d-flex align-items-center text-primary rounded-2 fw-bolder bg-light"
+            >Đăng nhập</a
+          >
+        </div>
+        <div class="d-flex gap-2 align-items-center dropdown" *ngIf="isLogin">
+          
+          <div  class="d-flex gap-2 align-items-center text-white dropdown-toggle cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
+            <div>
+              <img
+                width="24"
+                height="24"
+                class="rounded-circle"
+                src="{{ user.avatar }}"
+                alt=""
+              />
+            </div>
+            <div>Hi, {{ user.full_name }}</div>
+          </div>
+          <ul class="dropdown-menu text-gray">
+            <li><a class="dropdown-item text-gray" [routerLink]="['/account']"><i class="fa-solid fa-user"></i> Hồ sơ</a></li>
+            
+            <li><button class="dropdown-item text-gray" (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</button></li>
+          </ul>
+        </div>
+      </nav>
+      <nav
+        class="col-8 d-flex justify-content-end text-light nav-mobile hidden d-block d-md-none"
+      >
+        <div
+          class="btn btn-outline-primary border-0 hover-bg-0 text-light d-flex hover-bg-hover-1 d-flex align-items-center gap-2"
+        >
+          <i class="fa-regular fa-circle-user fs-3"></i>
+        </div>
+        <div
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasWithBothOptions"
+          aria-controls="offcanvasWithBothOptions"
+          class="btn btn-outline-primary border-0 hover-bg-0 text-light d-flex hover-bg-hover-1 d-flex align-items-center gap-2"
+        >
+          <i class="fa-solid fa-bars fs-3"></i>
+        </div>
+      </nav>
+    </div>
+
+    <div class="row mt-md-0 mt-2">
+      <div class="col-12 text-white d-flex gap-2 justify-content-md-center">
+        <a
+        [routerLink]="['/collection']" [queryParams]="{category:'tour'}"
+          class="border border-primary text-light fs-7 d-flex align-items-center gap-2 bg-hover-1 w-fit p-2 rounded-5 px-3"
+        >
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Địa điểm tham quan</span>
+        </a>
+
+        <div class="d-none gap-2 d-md-flex">
+          <a
+            [routerLink]="['/collection']" 
+            class="text-light fs-7 d-flex align-items-center gap-2 hover-bg-hover-1 w-fit p-2 rounded-5 px-3"
+          >
+            <i class="fa-solid fa-plane"></i>
+            <span>Chuyến bay</span>
+          </a>
+
+          <a
+          [routerLink]="['/collection']" [queryParams]="{category:'hotel'}"
+            class="text-light fs-7 d-flex align-items-center gap-2 hover-bg-hover-1 w-fit p-2 rounded-5 px-3"
+          >
+            <i class="fa-solid fa-hotel"></i>
+            <span>Khách sạn</span>
+          </a>
+
+          <a
+          [routerLink]="['/collection']"
+            class="text-light fs-7 d-flex align-items-center gap-2 hover-bg-hover-1 w-fit p-2 rounded-5 px-3"
+          >
+            <i class="fa-solid fa-car"></i>
+            <span>Thuê xe</span>
+          </a>
+
+          <a
+          [routerLink]="['/collection']" 
+            class="text-light fs-7 d-flex align-items-center gap-2 hover-bg-hover-1 w-fit p-2 rounded-5 px-3"
+          >
+            <i class="fa-regular fa-bookmark"></i>
+            <span>Khuyến mãi</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- header mobile start-->
+
+<div
+  class="offcanvas offcanvas-start"
+  data-bs-scroll="true"
+  tabindex="-1"
+  id="offcanvasWithBothOptions"
+  aria-labelledby="offcanvasWithBothOptionsLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Khác</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      <label for="" class="fw-bold">Ngôn ngữ</label>
+      <div>
+        <div class="d-flex gap-2 btn btn-outline-light text-dark">
+          <div>
+            <i class="fa-solid fa-earth-americas"></i>
+          </div>
+          <span>Tiếng việt</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <label for="" class="fw-bold">Hộ trợ</label>
+      <div>
+        <div class="d-flex gap-2 btn btn-outline-light text-dark">
+          <div>
+            <i class="fa-solid fa-circle-info"></i>
+          </div>
+          <span>Liên hệ</span>
+        </div>
+        <div class="d-flex gap-2 btn btn-outline-light text-dark">
+          <div>
+            <i class="fa-regular fa-circle-question"></i>
+          </div>
+          <span>Hỏi đáp</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <label for="" class="fw-bold">Chức năng</label>
+      <div>
+        <div class="d-flex gap-2 btn btn-outline-light text-dark">
+          <div>
+            <i class="fa-solid fa-plane"></i>
+          </div>
+          <span>Chuyến bay</span>
+        </div>
+        <div class="d-flex gap-2 btn btn-outline-light text-dark">
+          <div>
+            <i class="fa-solid fa-hotel"></i>
+          </div>
+          <span>Khách sạn</span>
+        </div>
+        <div class="d-flex gap-2 btn btn-outline-light text-dark">
+          <div>
+            <i class="fa-solid fa-car"></i>
+          </div>
+          <span>Thuê xe</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 border-top border-2 pt-4">
+      <button class="btn btn-primary w-100">Đăng nhập</button>
+      <button class="btn btn-outline-primary w-100 my-3">Đăng kí</button>
+    </div>
+  </div>
+</div>
+<!-- header mobile end-->
+<router-outlet></router-outlet>
+<!-- footer -->
+<footer class="mt-5 pt-5 border-top border-3 border-primary">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-sm-6">
+        <div class="fw-bold text-primary fs-5">Thông tin liên hệ</div>
+        <div class="mt-4 text-gray">
+          <div class="d-flex gap-2 align-items-center mb-2">
+            <i class="fa-solid fa-headset"></i>
+            <span class="fs-7">0358723520 / Liên hệ 24/7</span>
+          </div>
+          <div class="d-flex gap-2 align-items-center mb-2">
+            <i class="fa-solid fa-location-dot"></i>
+            <span class="fs-7">Cv.Quang Trung, Q.12, HCM</span>
+          </div>
+          <div class="d-flex gap-2 align-items-center mb-2">
+            <i class="fa-regular fa-envelope"></i>
+            <span class="fs-7">quynh232000.gmail.com</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-sm-6">
+        <div class="fw-bold text-primary fs-5">Chính sách của QuinTravel</div>
+        <div class="mt-4 text-gray">
+          <div class="d-flex gap-2 align-items-center mb-2">
+            <span class="fs-7">Phương thức thanh toán</span>
+          </div>
+          <div class="d-flex gap-2 align-items-center mb-2">
+            <span class="fs-7">Chính sách giao hàng</span>
+          </div>
+          <div class="d-flex gap-2 align-items-center mb-2">
+            <span class="fs-7">Chính sách đổi trả</span>
+          </div>
+          <div class="d-flex gap-2 align-items-center mb-2">
+            <span class="fs-7">Điều khoản mua bán</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-sm-6">
+        <div class="fw-bold text-primary fs-5">Về chúng tôi</div>
+        <div class="mt-4 text-gray">
+          <div class="d-flex gap-2 align-items-center mb-2">
+            <span class="fs-7">Câu chuyện của Quin</span>
+          </div>
+          <div class="d-flex gap-2 align-items-center mb-2">
+            <span class="fs-7">Tin tức</span>
+          </div>
+          <div class="d-flex gap-2 align-items-center mb-2">
+            <span class="fs-7">Tuyển dụng</span>
+          </div>
+          <div class="d-flex gap-2 align-items-center mb-2">
+            <span class="fs-7">Chương trình flash sale</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-lg-3 col-sm-2">
+        <div class="fw-bold text-primary fs-5">Theo dõi</div>
+        <div class="mt-4 text-gray">
+          <a
+            href="https://facebook.com/quynh232000"
+            class="d-flex text-gray gap-2 align-items-center mb-2"
+          >
+            <i class="fa-brands fa-facebook"></i>
+            <span class="fs-7">QuinTravel</span>
+          </a>
+          <a
+            href="https://mr-quynh.com"
+            class="d-flex text-gray gap-2 align-items-center mb-2"
+          >
+            <i class="fa-solid fa-location-dot"></i>
+            <span class="fs-7">Tiktok: QuinTravel</span>
+          </a>
+          <a
+            href="https://mr-quynh.com"
+            class="d-flex text-gray gap-2 align-items-center mb-2"
+          >
+            <i class="fa-brands fa-youtube"></i>
+            <span class="fs-7">Youtube: QuinTravel</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center p-2 text-gray mt-5 border border-top bg-bg">
+    Copyright © 2024 Mr Quynh
+  </div>
+</footer>
+<!-- script -->

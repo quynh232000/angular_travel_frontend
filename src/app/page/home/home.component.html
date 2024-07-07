@@ -1,0 +1,655 @@
+<main class="pb-4" style="padding-top: 90px">
+  <!-- banner -->
+  <div class="banner-home position-relative banner-home">
+    <img
+      src="assets/images/images/slider.jpg"
+      class="object-fit-cover w-100"
+      alt=""
+    />
+    <div class="banner-wrapper position-absolute top-0 start-0 end-0 bottom-0">
+      <div class="container d-flex flex-column justify-content-between h-100">
+        <div
+          class="swiper-container position-relative overflow-hidden mt-md-5 pt-1 flex-1 pt-1 banner-slider d-none d-md-block"
+        >
+          <div class="swiper-wrapper">
+            <div
+              class="swiper-slide active text-light d-flex flex-column align-items-start gap-2"
+            >
+              <div class="bg-green-1 bg-warning w-fit p-md-2 pd-0 fs-3">
+                Chào mừng đến mới
+              </div>
+              <div
+                class="bg-green-1 bg-warning w-fit p-md-2 pd-0 fs-1 text-uppercase"
+                style="font-size: 64px"
+              >
+                Quin Travel
+              </div>
+              <span class="bg-green-1 bg-warning w-fit p-md-2 pd-0"
+                >Nơi bạn có thể tìm được những địa điểm du lịch lí tưởng, độc
+                đáo</span
+              >
+            </div>
+
+            <div
+              class="swiper-slide active text-light d-flex flex-column align-items-start gap-2"
+            >
+              <div class="bg-green-1 bg-warning w-fit p-md-2 pd-0 fs-3">
+                Tìm tour du lịch
+              </div>
+              <div
+                class="bg-green-1 bg-warning w-fit p-md-2 pd-0 fs-1 text-uppercase"
+                style="font-size: 64px"
+              >
+                ƯU ĐÃI CỰC LỚN
+              </div>
+              <span class="bg-green-1 bg-warning w-fit p-md-2 pd-0"
+                >với nhiều ưu đãi khủng khi tìm tour trên Quin travel</span
+              >
+            </div>
+
+            <div
+              class="swiper-slide active text-light d-flex flex-column align-items-start gap-2"
+            >
+              <div class="bg-green-1 bg-warning w-fit p-md-2 pd-0 fs-3">
+                Trải nghiệm chọn gói
+              </div>
+              <div
+                class="bg-green-1 bg-warning w-fit p-md-2 pd-0 fs-1 text-uppercase"
+                style="font-size: 64px"
+              >
+                DU LỊCH QUỐC TẾ
+              </div>
+              <span class="bg-green-1 bg-warning w-fit p-md-2 pd-0"
+                >với nhiều chuyến du lịch quốc tế hấp dẫn mới lạ, tặng kèm nhiều dịch vụ chất lượng cao</span
+              >
+            </div>
+
+            <!-- Add more slides as needed -->
+          </div>
+          <!-- Add Pagination -->
+          <!-- <div class="swiper-pagination bottom-0"></div> -->
+          <!-- Add Navigation -->
+          <!-- <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div> -->
+        </div>
+        <!-- filter -->
+        <div class="w-100 h-filter">
+          <div class="d-flex">
+            <div
+              class="d-flex align-items-center gap-2 gap-sm-3 text-primary fw-bold bg-light py-sm-2 px-sm-3 py-1 px-2"
+            >
+              <i class="fa-solid fa-location-dot"></i>
+              <div>Địa điểm</div>
+            </div>
+            <a
+              href="#"
+              class="d-flex border-start border-info align-items-center gap-sm-3 gap-2 text-light fw-medium bg-primary py-sm-2 px-sm-3 py-1 px-2"
+            >
+              <i class="fa-solid fa-plane"></i>
+              <div>Chuyến bay</div>
+            </a>
+            <a
+              href="#"
+              class="border-start border-info d-flex align-items-center gap-sm-3 gap-2 text-light fw-medium bg-primary py-sm-2 px-sm-3 py-1 px-2"
+            >
+              <i class="fa-solid fa-hotel"></i>
+              <div>Khách sạn</div>
+            </a>
+            <a
+              href="#"
+              class="d-none d-sm-flex border-start border-info align-items-center gap-sm-3 gap-2 text-light fw-medium bg-primary py-sm-2 px-sm-3 py-1 px-2"
+            >
+              <i class="fa-solid fa-car"></i>
+              <div>Thuê xe</div>
+            </a>
+          </div>
+          <div
+            class="bg-light border-bottom border-primary border-3 p-4 d-md-flex d-block gap-4 w-100"
+          >
+            <div>
+              <label for="" class="fw-bold text-secondary">Loại:</label>
+              <div class="">
+                <select class="form-control w-fit" name="" id="">
+                  <option value="">--Loại tour--</option>
+                  <option value="inside">Trong nước</option>
+                  <option value="ouside">Ngoài nước</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="" class="fw-bold text-secondary">Điểm đi:</label>
+              <div class="">
+                <select class="form-control w-fit" name="" id="">
+                  <option value="">--Nơi khởi hành--</option>
+                  <option value="{{item.id}}" *ngFor="let item of provinces">{{item.name}}</option>
+                 
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="" class="fw-bold text-secondary">Điểm đến:</label>
+              <div class="">
+                <select class="form-control w-fit" name="" id="">
+                  <option value="">--Địa điểm đến--</option>
+                  <option value="{{item.id}}" *ngFor="let item of provinces">{{item.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label for="" class="fw-bold text-secondary">Ngày đi:</label>
+              <div class="">
+                <input type="date" class="form-control w-fit" />
+              </div>
+            </div>
+            <div
+              class="flex-1 d-flex justify-content-start w-100 align-items-end mt-md-0 mt-4"
+            >
+              <button class="btn btn-warning text-light h-fit btn-search">
+                <span>Tìm kiếm</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- uu dai slider -->
+  <section class="my-4">
+    <div class="container">
+      <div class="fs-2 fw-bold text-primary-1">Ưu đãi</div>
+      <span class=""
+        >Khuyến mãi, giảm giá và ưu đãi đặc biệt dành riêng cho bạn</span
+      >
+      <div class="py-3">
+        <div class="swiper-uudai position-relative overflow-hidden w-100">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide active">
+              <div class="card d-flex">
+                <div class="card-body d-flex gap-3">
+                  <div class="d-flex flex-column justify-content-between">
+                    <h5 class="card-title fw-bold">
+                      Vi vu tận hưởng không khí Thế vận hội mùa hè 2024?
+                    </h5>
+                    <p class="card-text fs-7">
+                      Brussels chỉ cách điểm nóng Olympics một chuyến tàu ngắn
+                    </p>
+                    <a [routerLink]="['/collection']" class="btn btn-primary w-fit"
+                      >Khám phá ngay</a
+                    >
+                  </div>
+                  <div style="width: 280px">
+                    <img
+                      src="https://media.travel.com.vn/Advertisings/bn_240612_Banner%20TCThaiLan-02.jpg"
+                      class="card-img-top w-100 rounded-4 object-fit-cover"
+                      alt="..."
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide active">
+              <div class="card d-flex">
+                <div class="card-body d-flex gap-3">
+                  <div class="d-flex flex-column justify-content-between flex-1">
+                    <h5 class="card-title fw-bold">
+                      Đặc Quyền Ẩm thực MICHELIN của khách sạn 5 sao Việt Nam
+                    </h5>
+                    <p class="card-text fs-7 card-name">
+                      Tặng 1 set menu khi dùng bữa tại tất cả các nhà hàng gắn sao MICHELIN tại Việt Nam khi đặt Tour trên Quin travel
+                    </p>
+                    <a [routerLink]="['/collection']" class="btn btn-primary w-fit"
+                      >Khám phá ngay</a
+                    >
+                  </div>
+                  <div style="width: 280px">
+                    <img
+                    height="152"
+                      src="https://dulichviet.com.vn/images/bandidau/images/TIN%20T%E1%BB%A8C%20DLV/2017/BAN%20TIN%20DU%20LICH%20VIET/khuyen-mai-du-lich-mua-thu_du-lich-viet.jpg"
+                      class="card-img-top w-100 rounded-4 object-fit-cover"
+                      alt="..."
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="swiper-slide active">
+              <div class="card d-flex">
+                <div class="card-body d-flex gap-3">
+                  <div class="d-flex flex-column justify-content-between flex-1">
+                    <h5 class="card-title fw-bold">
+                      Du lịch Nhật Bản Trong mùa thu lá rụng
+                    </h5>
+                    <p class="card-text fs-7 card-name">
+                      Giảm 10% khi đi Nhật bản trên 5 người tại Quin travel
+                    </p>
+                    <a [routerLink]="['/collection']" class="btn btn-primary w-fit"
+                      >Khám phá ngay</a
+                    >
+                  </div>
+                  <div style="width: 280px">
+                    <img
+                    height="152"
+                      src="https://media.vietravel.com/images/NewsPicture/KV_NHATBAN_1024-768.jpg"
+                      class="card-img-top w-100 rounded-4 object-fit-cover"
+                      alt="..."
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- tour torng nuoc -->
+  <section class="my-4">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="fs-2 fw-bold text-primary-1">Tour trong nước</div>
+        <a [routerLink]="['collection']" [queryParams]="{type:'inside'}" class="btn btn-outline-secondary">
+          <span>Xem tất cả</span>
+          <i class="fa-solid fa-arrow-right-long"></i>
+        </a>
+      </div>
+      <span class=""
+        >Du khách có thể nhận những khuyến mãi lớn tại thời điểm này.</span
+      >
+      <div class="py-3">
+        <div class="row" *ngIf="tourInside.length>0">
+          <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4" *ngFor="let item of tourInside">
+            <div class="card card-hover position-relative">
+              <div class="position-absolute start-0 top-0 p-2">
+                <div *ngIf="item.percent_sale>0" class="bg-warning px-2 py-1 rounded-2 text-white fw-bold">
+                  Sale
+                </div>
+              </div>
+              <div class="" style="height: 260px">
+                <img
+                  src="{{item.thumnail}}"
+                  class="card-img-top h-100 object-fit-cover"
+                  alt="{{item.title}}"
+                />
+              </div>
+              <div class="card-body">
+                <span class="fs-7">{{item.date_start |formatdate}} - {{item.number_of_day}} ngày</span>
+                <h5 class="card-title text-primary fw-bold mt-1 card-name">
+                  <a [routerLink]="['/tour',item.slug]" class="text-primary-1"
+                    >{{item.title}}</a
+                  >
+                </h5>
+                <span class="card-text fs-7"
+                  >Nơi khởi hành: {{item.province_start.name}}</span
+                >
+                <div class="mt-2" style="height: 30px;"><del *ngIf="item.percent_sale >0">Giá: {{(item.price/(100-item.percent_sale)*100)|formatprice}} đ</del></div>
+                <div class="d-flex text-warning justify-content-between">
+                  <span class="fw-bold fs-5">Còn: {{item.price|formatprice}} đ</span>
+                  <div class="bg-warning text-light px-2 py-1 fs-7 rounded-4" *ngIf="item.percent_sale >0">
+                    {{item.percent_sale}}% GIẢM
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between gap-2 my-2">
+                  <a [routerLink]="['/booking',item.slug]"  class="btn btn-danger flex-1"
+                    >Đặt ngay</a
+                  >
+                  <a [routerLink]="['/tour',item.slug]" class="btn btn-outline-primary"
+                    >Xem chi tiết</a
+                  >
+                </div>
+                <div class="d-flex justify-content-between mt-4">
+                  <a href="#" class="fs-7 fw-bold text-primary">
+                    <i class="fa-solid fa-circle-plus"></i>
+                    <span>Thêm vào so sánh</span>
+                  </a>
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="fs-7 fw-bold text-decoration-underline">
+                      Số chỗ còn
+                    </div>
+                    <span class="text-danger fw-bold fs-5">{{item.quantity}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- tour nuoc ngoai -->
+  <section class="my-4">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="fs-2 fw-bold text-primary-1">Tour nước ngoài</div>
+        <a [routerLink]="['/collection']" [queryParams]="{type:'ouside'}" class="btn btn-outline-secondary">
+          <span>Xem tất cả</span>
+          <i class="fa-solid fa-arrow-right-long"></i>
+        </a>
+      </div>
+      <span class=""
+        >Du khách có thể tìm được những chuyến du lịch quốc tế hấp dẫn.</span
+      >
+      <div class="py-3">
+        <div class="row" *ngIf="tourOutside.length>0">
+          <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4" *ngFor="let item of tourOutside">
+            <div class="card card-hover position-relative">
+              <div class="position-absolute start-0 top-0 p-2">
+                <div *ngIf="item.percent_sale>0" class="bg-warning px-2 py-1 rounded-2 text-white fw-bold">
+                  Sale
+                </div>
+              </div>
+              <div class="" style="height: 260px">
+                <img
+                  src="{{item.thumnail}}"
+                  class="card-img-top h-100 object-fit-cover"
+                  alt="{{item.title}}"
+                />
+              </div>
+              <div class="card-body">
+                <span class="fs-7">{{item.date_start |formatdate}} - {{item.number_of_day}} ngày</span>
+                <h5 class="card-title text-primary fw-bold mt-1 card-name">
+                  <a [routerLink]="['/tour',item.slug]" class="text-primary-1"
+                    >{{item.title}}</a
+                  >
+                </h5>
+                <span class="card-text fs-7"
+                  >Nơi khởi hành: {{item.province_start.name}}</span
+                >
+                <div class="mt-2" style="height: 30px;"><del *ngIf="item.percent_sale >0">Giá: {{(item.price/(100-item.percent_sale)*100)|formatprice}} đ</del></div>
+                <div class="d-flex text-warning justify-content-between">
+                  <span class="fw-bold fs-5">Còn: {{item.price|formatprice}} đ</span>
+                  <div class="bg-warning text-light px-2 py-1 fs-7 rounded-4" *ngIf="item.percent_sale >0">
+                    {{item.percent_sale}}% GIẢM
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between gap-2 my-2">
+                  <a [routerLink]="['/booking',item.slug]"  class="btn btn-danger flex-1"
+                    >Đặt ngay</a
+                  >
+                  <a [routerLink]="['/tour',item.slug]" class="btn btn-outline-primary"
+                    >Xem chi tiết</a
+                  >
+                </div>
+                <div class="d-flex justify-content-between mt-4">
+                  <a href="#" class="fs-7 fw-bold text-primary">
+                    <i class="fa-solid fa-circle-plus"></i>
+                    <span>Thêm vào so sánh</span>
+                  </a>
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="fs-7 fw-bold text-decoration-underline">
+                      Số chỗ còn
+                    </div>
+                    <span class="text-danger fw-bold fs-5">{{item.quantity}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- diem den thinh hanh -->
+  <section class="my-4">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="fs-2 fw-bold text-primary-1">Điểm đến yêu thích</div>
+        <a [routerLink]="['/collection']" class="btn btn-outline-secondary">
+          <span>Xem thêm</span>
+          <i class="fa-solid fa-arrow-right-long"></i>
+        </a>
+      </div>
+      <span class=""
+        >Du khách tìm kiếm về Việt Nam cũng đặt chỗ ở những nơi này</span
+      >
+      <div class="py-3">
+        <div class="row" *ngIf="locations.length>0">
+          <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-3" *ngFor="let item of locations |slice:0:4">
+            <a [routerLink]="['collection']" [queryParams]="{location:item.id}" class="card border border-0">
+              <div>
+                <img
+                height="240"
+                  src="{{item.thumnail}}"
+                  class="card-img-top rounded-4 object-fit-cover"
+                  alt="..."
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title fw-bold fs-5 text-center">{{item.name}}</h5>
+                <!-- <p class="card-text fs-7">Đã có 176.072 lượt khách</p> -->
+              </div>
+            </a>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ks yeu thich -->
+  <section class="my-4">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="fs-2 fw-bold text-primary-1">Khách sạn yêu thích</div>
+        <a [routerLink]="['/collection']" [queryParams]="{category:'hotel'}" class="btn btn-outline-secondary">
+          <span>Xem thêm</span>
+          <i class="fa-solid fa-arrow-right-long"></i>
+        </a>
+      </div>
+      <div class="py-3">
+        <div class="row" *ngIf="hotels.length>0">
+          <div class="col-12 col-sm-6 col-xl-3 col-md-4 mb-4" *ngFor="let item of hotels">
+            <a [routerLink]="['tour',item.slug]" class="card card-hover">
+              <div>
+                <img
+                  src="{{item.thumnail}}"
+                  class="card-img-top"
+                  alt="{{item.category}}"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title card-name text-primary-1 fw-bold">
+                 {{item.title}}
+                </h5>
+                <p class="card-text card-name">
+                  {{item.province_start.name}} - {{item.province_end.name}}:
+                </p>
+                <div class="d-flex gap-1 fs-7 align-items-center">
+                  <span>Số lượng <span> · </span></span>
+                  <div class="bg-warning text-white px-1 rounded-2"> {{item.quantity}}</div>
+                </div>
+                <div class="d-flex justify-content-end mt-3">
+                  <div class="text-gray">Chỉ từ:</div>
+                  <span class="fw-bold text-primary">{{item.price|formatprice}}</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- banner small -->
+  <section class="my-4 d-none d-md-block">
+    <div class="container d-flex justify-content-between">
+      <div class="d-flex align-items-end">
+        <div
+          style="width: 64px; height: 64px"
+          class="bg-warning rounded-circle"
+        ></div>
+      </div>
+      <div
+        style="width: 506px; height: 280px"
+        class="position-relative overflow-hidden w-100 d-flex justify-content-center pe-5"
+      >
+        <div
+          class="bg-primary rounded-circle position-absolute d-flex flex-column justify-content-center text-white align-items-center"
+          style="width: 600px; height: 600px; top: -110px"
+        >
+          <div style="max-width: 280px">
+            <div class="fw-bold fs-4">Tìm khách sạn cho chuyến đi tới</div>
+            <a href="#" class="btn btn-light mt-3 w-100 text-primary fw-bold"
+              >Khám phá khách sạn ngay</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="d-flex align-items-center" style="width: 360px">
+        <img width="360" src="assets/images/images/cat-sofa.png" alt="" />
+      </div>
+    </div>
+  </section>
+
+  <!-- tin tuc -->
+  <section class="my-4">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="fs-2 fw-bold text-primary">Tin tức</div>
+        <a [routerLink]="['/news']" class="btn btn-outline-secondary">
+          <span>Xem thêm</span>
+          <i class="fa-solid fa-arrow-right-long"></i>
+        </a>
+      </div>
+      <span class="">Cập nhật những tin tức mới nhất về Quin Travel</span>
+      <div class="row mt-4">
+        <div class="col-xl-7 col-md-6 col-sm-12 mb-4">
+          <div class="w-100">
+            <img
+              class="w-100 rounded-4 object-fit-cover"
+              style="height: 100%"
+              src="https://media.vietravel.com/images/news/du-lich-dai-loan265.png"
+              alt=""
+            />
+          </div>
+        </div>
+        <div
+          class="col-xl-5 col-md-6 col-sm-12 d-flex flex-column gap-4"
+         *ngIf="news.length >0"
+        >
+        <div class="row"  *ngFor="let item of news">
+          <div class="col-5">
+            <img
+              class="w-100 rounded-4"
+              src="{{item.thumbnail}}"
+              alt=""
+            />
+          </div>
+          <div class="col-7">
+            <div class="text-danger fw-bold">{{item.category =='travel' ?"Tin tức du lịch":"Tin tức khách sạn"}}</div>
+            <a [routerLink]="['/news',item.slug]" class="fw-bold my-3 card-name"
+              >{{item.title}}</a
+            >
+            <span class="text-gray fs-7">{{item.created_at | formatdate}}</span>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- more -->
+
+  <section class="my-4 container">
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div
+          class="d-flex gap-3 bg-bg px-3 py-3 rounded-4 shadow align-items-center"
+        >
+          <div>
+            <img
+              class="object-fit-cover"
+              width="58"
+              src="assets/images/icons/sale.png"
+              alt=""
+            />
+          </div>
+          <div>
+            <div class="fw-bold fs-7 mb-1">GIÁ TỐT - NHIỀU ƯU ĐÃI</div>
+            <div class="text-gray fs-7" style="height: 42px">
+              Ưu đãi và qua tặng hấp dẫn khi mua tour online
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div
+          class="d-flex gap-3 bg-bg px-3 py-3 rounded-4 shadow align-items-center"
+        >
+          <div>
+            <img
+              class="object-fit-cover"
+              width="58"
+              src="assets/images/icons/card.png"
+              alt=""
+            />
+          </div>
+          <div>
+            <div class="fw-bold fs-7 mb-1">THANH TOÁN AN TOÀN</div>
+            <div class="text-gray fs-7" style="height: 42px">
+              Được bảo mật bởi tổ chức quốc tế Global Sign
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div
+          class="d-flex gap-3 bg-bg px-3 py-3 rounded-4 shadow align-items-center"
+        >
+          <div>
+            <img
+              class="object-fit-cover"
+              width="58"
+              src="assets/images/icons/service.png"
+              alt=""
+            />
+          </div>
+          <div>
+            <div class="fw-bold fs-7 mb-1">TƯ VẤN MIỄN PHÍ</div>
+            <div class="text-gray fs-7" style="height: 42px">
+              Hỗ trợ tư vấn online miễn phí
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div
+          class="d-flex gap-3 bg-bg px-3 py-3 rounded-4 shadow align-items-center"
+        >
+          <div>
+            <img
+              class="object-fit-cover"
+              width="58"
+              src="assets/images/icons/brand.png"
+              alt=""
+            />
+            <!-- <img class="object-fit-cover" width="58" src="assets/images/icons/brand.png" alt="" /> -->
+          </div>
+          <div>
+            <div class="fw-bold fs-7 mb-1">THƯƠNG HIỆU UY TÍN</div>
+            <div class="text-gray fs-7" style="height: 42px">
+              Thương hiệu lữ hành hàng đầu Việt Nam
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

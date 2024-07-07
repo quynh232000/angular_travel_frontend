@@ -1,0 +1,8 @@
+.like_hover{
+    cursor: pointer;
+    transition: .3s ease;
+}
+.like_hover:hover{
+    background-color: rgb(201, 221, 238);
+    
+}
