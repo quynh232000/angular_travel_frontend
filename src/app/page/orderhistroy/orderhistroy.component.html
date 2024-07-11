@@ -1,0 +1,189 @@
+<div class="shadow p-4 rounded-2">
+  <div class="fw-bold text-primary-1 fs-5">Lịch sử đơn hàng</div>
+
+  <div class="mt-3">
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion-item" *ngFor="let item of listOrders">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            [attr.data-bs-target]="'#flush-collapse' + item.id"
+            [attr.aria-controls]="'flush-collapse' + item.id"
+            aria-expanded="false"
+          >
+            <div>
+              <img
+                src="{{ item.order_detail[0].product.thumnail }}"
+                alt=""
+                width="74"
+                height="54"
+                class="object-fit-cover rounded-2"
+              />
+            </div>
+            <div class="ps-2">
+              <div class="fw-bold text-primary-1">
+                {{ item.order_detail[0].product.title }}
+              </div>
+              <div class="mt-2 d-flex row">
+                <div class="d-flex gap-2 col-md-6">
+                  <div>Ngày đặt:</div>
+                  <div class="fw-bold">{{ item.created_at | formatdate }}</div>
+                </div>
+                <div class="d-flex gap-2 col-md-6">
+                  <div>Ngày khởi hành:</div>
+                  <div class="fw-bold">
+                    {{ item.order_detail[0].product.date_start | formatdate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </button>
+        </h2>
+        <div
+          id="flush-collapse{{ item.id }}"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionFlushExample"
+        >
+          <div class="accordion-body border">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mt-3 fs-7 d-flex flex-column gap-2">
+                  <div class="d-flex gap-2">
+                    <div>Mã tuor:</div>
+                    <div class="fw-bold">
+                      {{ item.order_detail[0].product.uuid }}
+                    </div>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <div>Khởi hành:</div>
+                    <div class="fw-bold">
+                      {{ item.order_detail[0].product.date_start | formatdate }}
+                    </div>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <div>Thời gian:</div>
+                    <div class="fw-bold">
+                      {{ item.order_detail[0].product.number_of_day }} ngày
+                    </div>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <div>Nơi khởi hành:</div>
+                    <div class="fw-bold">
+                      {{ item.order_detail[0].product.province_start?.name }}
+                    </div>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <div>Dòng tour:</div>
+                    <div class="fw-bold">
+                      {{ item.order_detail[0].product.tour_pakage }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mt-3 fs-7 d-flex flex-column gap-2">
+                  <div class="d-flex gap-2">
+                    <div style="min-width: 120px">Người lớn:</div>
+                    <div class="fw-bold">
+                      <div>
+                        {{ item.order_detail[0].quantity }} x
+                        {{ item.order_detail[0].price | formatprice }} đ
+                      </div>
+                      <div class="text-primary">
+                        {{
+                          item.order_detail[0].price *
+                            item.order_detail[0].quantity | formatprice
+                        }}
+                        đ
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="d-flex gap-2"
+                    *ngIf="item.order_detail[0].quantity_child > 0"
+                  >
+                    <div style="min-width: 120px">Người trẻ em:</div>
+                    <div class="fw-bold">
+                      <div>
+                        {{ item.order_detail[0].quantity_child }} x
+                        {{ item.order_detail[0].price | formatprice }} đ
+                      </div>
+                      <div class="text-primary">
+                        {{
+                          item.order_detail[0].price *
+                            item.order_detail[0].quantity_child | formatprice
+                        }}
+                        đ
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="d-flex gap-2"
+                    *ngIf="item.order_detail[0].quantity_baby"
+                  >
+                    <div style="min-width: 120px">Em bé:</div>
+                    <div class="fw-bold">
+                      <div>
+                        {{ item.order_detail[0].quantity_baby }} x
+                        {{ item.order_detail[0].price_baby | formatprice }} đ
+                      </div>
+                      <div class="text-primary">
+                        {{
+                          item.order_detail[0].price_baby *
+                            item.order_detail[0].quantity_baby | formatprice
+                        }}
+                        đ
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <div style="min-width: 120px">Phụ thu:</div>
+                    <div class="fw-bold">
+                      <div>
+                        {{ item.order_detail[0].additional_fee | formatprice }}
+                        đ
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex gap-2">
+                    <div class="text-danger fw-bold" style="min-width: 120px">
+                      THANH TOÁN:
+                    </div>
+                    <div class="fw-bold">
+                      {{
+                        item.order_detail[0].price *
+                          item.order_detail[0].quantity +
+                          item.order_detail[0].price *
+                            item.order_detail[0].quantity_child +
+                          item.order_detail[0].price_baby *
+                            item.order_detail[0].quantity_baby +
+                          item.order_detail[0].additional_fee | formatprice
+                      }}
+                      đ
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div
+                class="col-12 alert  alert-{{
+                  item.payment_status ? 'success' : 'warning'
+                }} text-center fw-bold"
+              >
+                {{ item.payment_status ? "Đã thanh toán" : "Chưa thanh toán" }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="listOrders.length == 0">
+      <div class="alert alert-info text-center">Bạn chưa có đơn hàng nào!</div>
+    </div>
+  </div>
+</div>

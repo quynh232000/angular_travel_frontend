@@ -1,0 +1,62 @@
+<main class="pb-4" style="padding-top: 90px">
+  <div class="container py-4">
+    <div class="row">
+      <div class="col-md-12 m-auto">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="shadow p-4 rounded-3 border">
+              <div class="d-flex gap-3 border-bottom pb-2">
+                <div>
+                  <img
+                    width="46"
+                    height="46"
+                    class="rounded-circle object-fit-cover"
+                    src="{{user.avatar }}"
+                    alt=""
+                  />
+                </div>
+                <div>
+                  <div class="fw-bold text-primary-1">Hi, {{user.full_name}}</div>
+                  <div class="text-gray fs-7 mt-1">
+                    <i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-3 d-flex flex-column gap-2">
+                <a
+                 [routerLink]="['/account']"
+                 
+                  class="d-flex align-items-center gap-2 py-2 px-3 rounded-1 text-gray btn btn-outline-primary border-0 {{isRouteActive('/account') ?' bg-primary text-light' :''}} "
+                >
+                  <div><i class="fa-solid fa-user"></i></div>
+                  <div>Hồ sơ</div>
+                </a>
+
+                <a
+                [routerLink]="['/account/orderhistory']"
+                  class="d-flex align-items-center gap-2 py-2 px-3 rounded-1 text-gray btn btn-outline-primary border-0 {{isRouteActive('/account/orderhistory') ?' bg-primary text-light' :''}}"
+                >
+                  <div><i class="fa-solid fa-boxes-packing"></i></div>
+                  <div>Đơn hàng</div>
+                </a>
+
+                <a
+                [routerLink]="['/account/sercurity']"
+                  class="d-flex align-items-center gap-2 py-2 px-3 rounded-1 text-gray btn btn-outline-primary border-0 {{isRouteActive('/account/sercurity') ?' bg-primary text-light' :''}}"
+                >
+                  <div><i class="fa-solid fa-lock"></i></div>
+                  <div>Mật khẩu</div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-9">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

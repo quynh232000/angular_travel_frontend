@@ -1,0 +1,76 @@
+<section class="">
+  <div class="shadow p-4 rounded-2">
+    <div class="fw-bold text-primary-1 fs-5">Thay đổi mật khẩu</div>
+
+    <div class="my-4">
+      <div class="row d-flex align-items-center mb-3">
+        <div class="col-sm-3">Mật khẩu cũ</div>
+        <div class="col-sm-9">
+          <input
+            type="password"
+            name="current_password"
+            [(ngModel)]="changeObj.current_password"
+            class="form-control"
+            placeholder=""
+          />
+        </div>
+      </div>
+
+      <div class="row d-flex align-items-center mb-3">
+        <div class="col-sm-3">Mật khẩu mới</div>
+        <div class="col-sm-9">
+          <input
+            type="password"
+            name="new_password"
+            [(ngModel)]="changeObj.new_password"
+            class="form-control"
+            placeholder=""
+          />
+        </div>
+      </div>
+
+      <div class="row d-flex align-items-center mb-3">
+        <div class="col-sm-3">Xác nhận mật khẩu mới</div>
+        <div class="col-sm-9">
+          <input
+            type="password"
+            name="new_password_confirmation"
+            [(ngModel)]="changeObj.new_password_confirmation"
+            class="form-control"
+            placeholder=""
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-9">
+        <button
+          *ngIf="!loading"
+          class="btn btn-warning text-light fw-bold px-4"
+          (click)="onSubmit()"
+        >
+          Cập nhật
+        </button>
+
+        <button
+          *ngIf="loading"
+          disabled
+          class="btn btn-warning text-light fw-bold px-4"
+          (click)="onSubmit()"
+        >
+          Cập nhật
+        </button>
+      </div>
+    </div>
+    <div class="mt-5">
+      <div class="alert alert-danger text-center py-2" *ngIf="messError">
+        {{ messError }}
+      </div>
+      <div class="alert alert-success text-center py-2" *ngIf="messSuccess">
+        {{ messSuccess }}
+      </div>
+    </div>
+  </div>
+</section>

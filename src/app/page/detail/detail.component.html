@@ -1,0 +1,599 @@
+<main style="padding-top: 90px">
+  <div class="container pt-3">
+    <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/']">Trang chủ</a></li>
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/collection']">{{
+            tourdetail.type == "inside" ? "Trong nước" : "Nước ngoài"
+          }}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          {{ tourdetail.title }}
+        </li>
+      </ol>
+    </nav>
+  </div>
+  <div class="bg-bg pb-4">
+    <div class="container">
+      <div class="d-lg-flex pt-4">
+        <div class="flex-1 pe-md-5 me-md-5">
+          <h4 class="fw-bold text-primary-1">
+            {{ tourdetail.title }}
+          </h4>
+          <div class="d-flex gap-3 align-items-center mt-3">
+            <div
+              class="bg-warning w-fit fs-3 fw-bold py-2 p-4 rounded-2 great text-primary-1"
+            >
+              9
+            </div>
+            <div>
+              <div class="">Còn lại</div>
+              <span class="fs-7">{{ tourdetail.quantity }} vé</span>
+            </div>
+            <div *ngIf="isLogin" (click)="likeTour(tourdetail.id)"
+              class="border py-3 p-4 rounded-2 d-flex gap-2 align-items-center hover-bg-primary like_hover"
+            >
+              <i
+                class="fa-solid fa-heart {{
+                  tourdetail.is_like ? 'text-danger' : 'text-gray'
+                }} fs-4"
+              ></i>
+              <span>{{ tourdetail.like_count }}</span>
+            </div>
+            <!-- not login -->
+            <div *ngIf="!isLogin" 
+              class="border py-3 p-4 rounded-2 d-flex gap-2 align-items-center"
+            >
+              <i
+                class="fa-solid fa-heart {{
+                  tourdetail.is_like ? 'text-danger' : 'text-gray'
+                }} fs-4"
+              ></i>
+              <span>{{ tourdetail.like_count }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-column align-items-end my-4 my-md-0">
+          <div>
+            <del *ngIf="tourdetail.percent_sale >0" class="d-inline fs-7 text-gray"> Giá: {{tourdetail.price/(100-tourdetail.percent_sale)*100 |formatprice}} đ/khách </del>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <del *ngIf="tourdetail.percent_sale >0"
+              class="bg-danger text-light fs-7 fw-bold px-2 py-0 rounded-1 d-inline-block h-fit"
+              >GIẢM {{tourdetail.percent_sale}}%</del
+            >
+            <div class="text-danger fw-bold fs-4">{{tourdetail.price |formatprice}}</div>
+            <div>/khách</div>
+          </div>
+        </div>
+        <div class="d-flex flex-column ps-3 gap-2">
+          <a
+            [routerLink]="['/booking',tourdetail.slug]"
+            class="d-flex gap-2 align-items-center justify-content-center btn btn-danger px-5 py-2"
+          >
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Đặt ngay</span>
+          </a>
+          <button
+            class="d-flex gap-2 align-items-center btn btn-outline-secondary px-5 py-2 justify-content-center"
+          >
+            <span>Liên hệ tư vấn</span>
+          </button>
+        </div>
+      </div>
+      <!-- image -->
+      <div class="row my-4">
+        <div class="col-md-7 mb-md-0 mb-2">
+          <img
+            class="w-100 h-100 rounded-3"
+            src="{{tourdetail.thumnail}}"
+            alt=""
+          />
+        </div>
+        <div class="col-md-5 d-flex flex-column justify-content-between gap-4">
+          <div class="row flex-1">
+            <div class="col-md-6 mb-md-0 mb-2">
+              <img
+                class="w-100 h-100 rounded-3 object-fit-cover"
+                src="{{tourdetail.images[0]}}"
+                alt=""
+              />
+            </div>
+            <div class="col-md-6 mb-md-0 mb-2">
+              <img
+                class="w-100 h-100 rounded-3 object-fit-cover"
+                src="{{tourdetail.images[1]}}"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="row flex-1">
+            <div class="col-md-12">
+              <img
+                class="w-100 h-100 rounded-3 object-fit-cover"
+                src="{{tourdetail.images[2]}}"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- info -->
+      <div class="row">
+        <div class="col-lg-5 col sm-12">
+          <div
+            class="bg-white p-4 rounded-2 d-flex justify-content-between h-fit"
+          >
+            <div class="d-flex flex-column gap-3">
+              <div class="d-flex gap-2">
+                <div>Khời hành:</div>
+                <div class="fw-bold text-primary-1">
+                  {{tourdetail.date_start|formatdate}} - Giờ đi: {{tourdetail.time_start}}
+                </div>
+              </div>
+             
+              <div class="d-flex gap-2">
+                <div>Thời gian:</div>
+                <div class="fw-bold text-primary-1">{{tourdetail.number_of_day}} ngày</div>
+              </div>
+              <div class="d-flex gap-2">
+                <div>Nơi khởi hành:</div>
+                <div class="fw-bold text-primary-1">{{tourdetail.province_start.name}}</div>
+              </div>
+              <div class="d-flex gap-2">
+                <div>Nơi điểm đến:</div>
+                <div class="fw-bold text-primary-1">{{tourdetail.province_end.name}}</div>
+              </div>
+              <div class="d-flex gap-2">
+                <div>Số chỗ còn nhận:</div>
+                <div class="fw-bold text-primary-1">{{tourdetail.quantity}}</div>
+              </div>
+            </div>
+            <a
+              [routerLink]="['collection']"
+              class="d-flex gap-2 align-items-center h-fit btn btn-outline-secondary"
+            >
+              <i class="fa-regular fa-calendar-days"></i>
+              <span>Ngày khác</span>
+            </a>
+          </div>
+
+          <div class="mt-4 d-flex justify-content-center gap-2">
+            <div
+              class="d-flex p-2 align-items-center gap-2 text-light px-4 btn btn-warning"
+            >
+              <i class="fa-solid fa-phone"></i>
+              <span>Tư vấn</span>
+            </div>
+            <div
+              class="d-flex p-2 align-items-center gap-2 px-4 btn btn-outline-secondary"
+            >
+              <i class="fa-regular fa-envelope"></i>
+              <span>Gửi hỗ trợ</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7 col-sm-12 ps-4 mt-4 mt-lg-0 border-bottom">
+          <div class="row">
+            <div class="col-sm-6 col-md-4 col-xl-3 mb-4">
+              <div class="p-2">
+                <i class="fa-regular fa-flag text-primary fs-5"></i>
+                <div class="fw-bold text-primary-1 mb-1">Thời gian</div>
+                <div class="text-gray fs-7">{{tourdetail.number_of_day}} ngày {{tourdetail.number_of_day -1}} đêm</div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-xl-3 mb-4">
+              <div class="p-2">
+                <i class="text-primary fs-5 fa-solid fa-car"></i>
+                <div class="fw-bold text-primary-1 mb-1">
+                  Phương tiện di chuyển
+                </div>
+                <div class="text-gray fs-7">{{tourdetail.transportation =='airplane' ?"Máy bay":"Ô tô"}}</div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-xl-3 mb-4">
+              <div class="p-2">
+                <i class="text-primary fs-5 fa-solid fa-map-location-dot"></i>
+                <div class="fw-bold text-primary-1 mb-1">Điểm tham quan</div>
+                <div class="text-gray fs-7">
+                  {{tourdetail.province_end.name}}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-xl-3 mb-4">
+              <div class="p-2">
+                <i class="text-primary fs-5 fa-solid fa-utensils"></i>
+                <div class="fw-bold text-primary-1 mb-1">Ẩm thực</div>
+                <div class="text-gray fs-7">
+                  Buffet sáng, Theo thực đơn, Đặc sản địa phương
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-xl-3 mb-4">
+              <div class="p-2">
+                <i class="text-primary fs-5 fa-solid fa-hotel"></i>
+                <div class="fw-bold text-primary-1 mb-1">Khách sạn</div>
+                <div class="text-gray fs-7">Khách sạn 4 sao</div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-xl-3 mb-4">
+              <div class="p-2">
+                <i class="text-primary fs-5 fa-regular fa-clock"></i>
+                <div class="fw-bold text-primary-1 mb-1">
+                  Thời gian lý tưởng
+                </div>
+                <div class="text-gray fs-7">Quanh Năm</div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-xl-3 mb-4">
+              <div class="p-2">
+                <i class="text-primary fs-5 fa-solid fa-users"></i>
+                <div class="fw-bold text-primary-1 mb-1">
+                  Đối tượng thích hợp
+                </div>
+                <div class="text-gray fs-7">
+                  Cặp đôi, Gia đình nhiều thế hệ, Thanh niên, Trẻ em
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-xl-3 mb-4">
+              <div class="p-2">
+                <i class="text-primary fs-5 fa-solid fa-ticket"></i>
+                <div class="fw-bold text-primary-1 mb-1">Ưu đãi</div>
+                <div class="text-gray fs-7">
+                  Đã ưu đãi trực tiếp vào giá tour
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="text-center py-5 fw-bold fs-4 text-primary-1">Lịch trình</div>
+    <!-- calander -->
+    <div class="row border rounded-2 overflow-hidden">
+      <div class="col-md-4 py-4 bg-bg d-none d-lg-block">
+        <div class="d-flex align-items-start gap-3 mb-5" *ngFor="let item of tourdetail.process_tour; let sr= index">
+          <div class="d-flex align-items-center gap-2 pt-4">
+            <span>Ngày</span>
+            <div
+              class="bg-danger rounded-circle w-fit text-white d-flex justify-content-center align-items-center"
+              style="width: 26px; height: 26px"
+            >
+              {{sr+1}}
+            </div>
+          </div>
+          <div>
+            <div class="fs-7 fw-bold text-primary-1">{{item.date|formatdate}}</div>
+            <div class="fw-bold ">
+              {{item.title}}
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
+
+      <div class="col-lg-8">
+        <div class="p-4">
+          <div *ngFor="let item of tourdetail.process_tour; let sr=index">
+            <div class="fw-bold text-primary-1 fs-5">
+              {{item.title}}
+            </div>
+            <div class="border-dashed-start ps-4 my-3" [innerHTML]="item.content">
+           
+            </div>
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- detail -->
+
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <div class="fw-bold text-primary-1 fs-5 mb-3">Chi tiết tour</div>
+        <div class="bg-bg p-4 rounded-3">
+          <div class="border-bottom">
+            <div class="text-primary-1 fw-bold">Thông tin chuyến bay</div>
+            <div>
+              <div class="mt-3">
+                <div
+                  class="d-flex align-items-center gap-2 mb-2 text-danger fw-bold"
+                >
+                  <i class="fa-solid fa-circle-plus"></i> Ngày đi - {{tourdetail.date_start|formatdate}}
+                </div>
+                <ul>
+                  <li class="text-success fw-bold">
+                    Từ: {{tourdetail.province_start.name}} : {{tourdetail.time_start}}
+                  </li>
+                  <li class="text-success fw-bold">Đến: {{tourdetail.province_end.name}} </li>
+                
+                </ul>
+              </div>
+              <div class="mt-3">
+                <div
+                  class="d-flex align-items-center gap-2 mb-2 text-danger fw-bold"
+                >
+                  <i class="fa-solid fa-circle-plus"></i> Ngày về - {{tourdetail.process_tour[tourdetail.process_tour.length-1] &&tourdetail.process_tour[tourdetail.process_tour.length-1].date |formatdate}}
+                </div>
+                <ul>
+                  <li class="text-success fw-bold">Từ: {{tourdetail.province_end.name}} </li>
+                  <li class="text-success fw-bold">
+                    Đến: {{tourdetail.province_start.name}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <div class="text-primary-1 fw-bold">Thông tin tập trung</div>
+            <div class="text-primary-1">
+              <div class="my-4 d-flex">
+                <div style="min-width: 160px">Ngày tập trung</div>
+                <div>
+                  <div>{{tourdetail.time_start}}</div>
+                  <div>{{tourdetail.date_start|formatdate}}</div>
+                </div>
+              </div>
+              <div class="my-4 d-flex">
+                <div style="min-width: 160px">Nơi tập trung</div>
+                <div>
+                  <div>Sân bay</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="ps-md-4">
+          <div class="fw-bold text-primary-1 fs-5 mb-3">
+            Giá tour & phụ thu phòng đơn
+          </div>
+          <div class="bg-bg p-4 rounded-3 text-primary-1">
+            <div class="row">
+              <div class="col-7 fw-bold">Loại khách</div>
+              <div class="col-5 fw-bold">Giá tour</div>
+            </div>
+            <div class="row my-3">
+              <div class="col-7">Người lớn (Từ 12 tuổi trở lên)</div>
+              <div class="col-5 text-danger">{{tourdetail.price|formatprice}}</div>
+            </div>
+            <div class="row my-3">
+              <div class="col-7">Trẻ em (Từ 2 tuổi đến dưới 12 tuổi)</div>
+              <div class="col-5 text-danger">{{tourdetail.price_child|formatprice}}</div>
+            </div>
+            <div class="row my-3">
+              <div class="col-7">Em bé (Dưới 2 tuổi)</div>
+              <div class="col-5 text-danger">{{tourdetail.price_baby|formatprice}}</div>
+            </div>
+            <div class="row my-3 fw-bold">
+              <div class="col-7">Phụ thu phòng đơn</div>
+              <div class="col-5 text-danger">{{tourdetail.additional_fee|formatprice}}</div>
+            </div>
+          </div>
+
+          <div class="fw-bold text-primary-1 fs-5 my-3">
+            Thông tin hướng dẫn viên
+          </div>
+
+          <div class="bg-bg p-4 rounded-3 text-primary-1">
+            <div>HDV dẫn đoàn</div>
+
+            <strong class="">{{tourdetail.tourguide.full_name}}</strong>
+
+            <p class="mt-4">
+              {{tourdetail.tourguide.address }}
+            </p>
+
+            <div>SDT: {{tourdetail.tourguide.phone_number}}</div>
+            <div class="text-success">Đang cập nhật</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- tour suggestion -->
+  <div class="container">
+    <div class="text-primary-1 text-center pt-5 pb-4 fs-4 fw-bold">
+      Có thể Quý khách sẽ thích
+    </div>
+    <div>
+      <div class="row">
+        <div class="col-12 col-sm-6 col-xl-3 mb-4">
+          <div class="card card-hover position-relative">
+            <div class="position-absolute start-0 top-0 p-2">
+              <div class="bg-warning px-2 py-1 rounded-2 text-white fw-bold">
+                Sale
+              </div>
+            </div>
+            <div class="" style="height: 260px">
+              <img
+                src="https://media.travel.com.vn/LastMinute/lm_240625050617_329382_BKK%20shopping%20mall.jpg"
+                class="card-img-top h-100 object-fit-cover"
+                alt="..."
+              />
+            </div>
+            <div class="card-body">
+              <span class="fs-7">27/6/2024 - 5 ngày</span>
+              <h5 class="card-title text-primary-1 fw-bold mt-1 card-name">
+                <a href="./detail.html" class="text-primary-1"
+                  >Thái Lan: Bangkok - Pattaya (Vườn lan Nong Nooch, tặng Show
+                  Alcazar và Buffet tại BaiYoke Sky)</a
+                >
+              </h5>
+              <span class="card-text fs-7">Nơi khởi hành: TP. Hồ Chí Minh</span>
+              <div class="mt-2"><del>Giá: 4.990.000 đ</del></div>
+              <div class="d-flex text-warning justify-content-between">
+                <span class="fw-bold fs-5">Còn: 3.999.000 đ</span>
+                <div class="bg-warning text-light px-2 py-1 fs-7 rounded-4">
+                  9% GIẢM
+                </div>
+              </div>
+              <div class="d-flex justify-content-between gap-2 my-2">
+                <a href="#" class="btn btn-danger flex-1">Đặt ngay</a>
+                <a href="/detail.html" class="btn btn-outline-primary"
+                  >Xem chi tiết</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3 mb-4">
+          <div class="card card-hover position-relative">
+            <div class="position-absolute start-0 top-0 p-2">
+              <div class="bg-warning px-2 py-1 rounded-2 text-white fw-bold">
+                Sale
+              </div>
+            </div>
+            <div class="" style="height: 260px">
+              <img
+                src="https://media.travel.com.vn/LastMinute/lm_240625050617_329382_BKK%20shopping%20mall.jpg"
+                class="card-img-top h-100 object-fit-cover"
+                alt="..."
+              />
+            </div>
+            <div class="card-body">
+              <span class="fs-7">27/6/2024 - 5 ngày</span>
+              <h5 class="card-title text-primary-1 fw-bold mt-1 card-name">
+                <a href="./detail.html" class="text-primary-1"
+                  >Thái Lan: Bangkok - Pattaya (Vườn lan Nong Nooch, tặng Show
+                  Alcazar và Buffet tại BaiYoke Sky)</a
+                >
+              </h5>
+              <span class="card-text fs-7">Nơi khởi hành: TP. Hồ Chí Minh</span>
+              <div class="mt-2"><del>Giá: 4.990.000 đ</del></div>
+              <div class="d-flex text-warning justify-content-between">
+                <span class="fw-bold fs-5">Còn: 3.999.000 đ</span>
+                <div class="bg-warning text-light px-2 py-1 fs-7 rounded-4">
+                  9% GIẢM
+                </div>
+              </div>
+              <div class="d-flex justify-content-between gap-2 my-2">
+                <a href="#" class="btn btn-danger flex-1">Đặt ngay</a>
+                <a href="/detail.html" class="btn btn-outline-primary"
+                  >Xem chi tiết</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3 mb-4">
+          <div class="card card-hover position-relative">
+            <div class="position-absolute start-0 top-0 p-2">
+              <div class="bg-warning px-2 py-1 rounded-2 text-white fw-bold">
+                Sale
+              </div>
+            </div>
+            <div class="" style="height: 260px">
+              <img
+                src="https://media.travel.com.vn/LastMinute/lm_240625050617_329382_BKK%20shopping%20mall.jpg"
+                class="card-img-top h-100 object-fit-cover"
+                alt="..."
+              />
+            </div>
+            <div class="card-body">
+              <span class="fs-7">27/6/2024 - 5 ngày</span>
+              <h5 class="card-title text-primary-1 fw-bold mt-1 card-name">
+                <a href="./detail.html" class="text-primary-1"
+                  >Thái Lan: Bangkok - Pattaya (Vườn lan Nong Nooch, tặng Show
+                  Alcazar và Buffet tại BaiYoke Sky)</a
+                >
+              </h5>
+              <span class="card-text fs-7">Nơi khởi hành: TP. Hồ Chí Minh</span>
+              <div class="mt-2"><del>Giá: 4.990.000 đ</del></div>
+              <div class="d-flex text-warning justify-content-between">
+                <span class="fw-bold fs-5">Còn: 3.999.000 đ</span>
+                <div class="bg-warning text-light px-2 py-1 fs-7 rounded-4">
+                  9% GIẢM
+                </div>
+              </div>
+              <div class="d-flex justify-content-between gap-2 my-2">
+                <a href="#" class="btn btn-danger flex-1">Đặt ngay</a>
+                <a href="/detail.html" class="btn btn-outline-primary"
+                  >Xem chi tiết</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3 mb-4">
+          <div class="card card-hover position-relative">
+            <div class="position-absolute start-0 top-0 p-2">
+              <div class="bg-warning px-2 py-1 rounded-2 text-white fw-bold">
+                Sale
+              </div>
+            </div>
+            <div class="" style="height: 260px">
+              <img
+                src="https://media.travel.com.vn/LastMinute/lm_240625050617_329382_BKK%20shopping%20mall.jpg"
+                class="card-img-top h-100 object-fit-cover"
+                alt="..."
+              />
+            </div>
+            <div class="card-body">
+              <span class="fs-7">27/6/2024 - 5 ngày</span>
+              <h5 class="card-title text-primary-1 fw-bold mt-1 card-name">
+                <a href="./detail.html" class="text-primary-1"
+                  >Thái Lan: Bangkok - Pattaya (Vườn lan Nong Nooch, tặng Show
+                  Alcazar và Buffet tại BaiYoke Sky)</a
+                >
+              </h5>
+              <span class="card-text fs-7">Nơi khởi hành: TP. Hồ Chí Minh</span>
+              <div class="mt-2"><del>Giá: 4.990.000 đ</del></div>
+              <div class="d-flex text-warning justify-content-between">
+                <span class="fw-bold fs-5">Còn: 3.999.000 đ</span>
+                <div class="bg-warning text-light px-2 py-1 fs-7 rounded-4">
+                  9% GIẢM
+                </div>
+              </div>
+              <div class="d-flex justify-content-between gap-2 my-2">
+                <a href="#" class="btn btn-danger flex-1">Đặt ngay</a>
+                <a href="/detail.html" class="btn btn-outline-primary"
+                  >Xem chi tiết</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-center pt-3">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</main>

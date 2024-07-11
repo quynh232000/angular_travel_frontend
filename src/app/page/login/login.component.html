@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta property="og:image" content="assets/images/logo/logo-no-text.png" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="assets/images/logo/logo-no-text.png"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quin - Đăng nhập</title>
+    <!-- <link rel="stylesheet" href="./src/bootstrap/css/bootstrap.min.css" /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- style css -->
+
+    <!-- <link rel="stylesheet" href="./src/css/style.css" /> -->
+
+    <!-- slider -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <style>
+      .gradient-custom-2 {
+        background: var(--primary);
+
+        background: linear-gradient(
+          to right,
+          var(--priamry),
+          #7aaddd,
+          #4f09dd,
+          #4c9ce8
+        );
+      }
+
+      @media (min-width: 768px) {
+        .gradient-form {
+          /* height: 100vh !important; */
+        }
+      }
+      @media (min-width: 769px) {
+        .gradient-custom-2 {
+          border-top-right-radius: 0.3rem;
+          border-bottom-right-radius: 0.3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section
+      class="gradient-form text-primary-1"
+      style="background-color: #eee; min-height: 100vh"
+    >
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-xl-10">
+            <div class="card rounded-3 text-primary-1 overflow-hidden">
+              <div class="row g-0">
+                <div class="col-lg-5">
+                  <div class="card-body p-md-3 mx-md-4">
+                    <div class="text-center rounded-3">
+                      <a [routerLink]="['/']">
+                        <img
+                          src="assets/images/logo/logo.png"
+                          style="width: 185px"
+                          class="mb-3 rounded-3"
+                          alt="logo"
+                        />
+                      </a>
+                      <h4 class="mt-1 mb-5 pb-1">
+                        Chào mừng đến với QuinTravel
+                      </h4>
+                    </div>
+
+                    <form>
+                      <p class="text-primary-1 fw-bold">
+                        Đăng nhập tài khoản của bạn.
+                      </p>
+
+                      <div data-mdb-input-init class="form-outline mb-2">
+                        <label
+                          class="form-label text-primary-1 fw-bold fs-7"
+                          for="form2Example11"
+                          ><i class="fa-solid fa-envelope"></i> Email</label
+                        >
+                        <input
+                          type="email"
+                          id="form2Example11"
+                          name="email"
+                          class="form-control"
+                          [(ngModel)]="loginObj.email"
+                          placeholder="Nhập email..."
+                        />
+                        <div>
+                          <small *ngIf="messMail" class="text-danger">{{
+                            messMail
+                          }}</small>
+                        </div>
+                      </div>
+
+                      <div data-mdb-input-init class="form-outline mb-1">
+                        <label
+                          class="form-label text-primary-1 fw-bold fs-7"
+                          for="form2Example22"
+                          ><i class="fa-solid fa-lock"></i> Mật khẩu</label
+                        >
+                        <input
+                          type="password"
+                          id="form2Example22"
+                          [(ngModel)]="loginObj.password"
+                          name="password"
+                          class="form-control"
+                          placeholder="Nhập mật khẩu..."
+                        />
+                        <div>
+                          <small *ngIf="messPass" class="text-danger">{{
+                            messPass
+                          }}</small>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-end mb-4">
+                        <a
+                          class="text-muted fs-7 text-right text-primary-1"
+                          href="#!"
+                          >Quên mật khẩu?</a
+                        >
+                      </div>
+
+                      <div *ngIf="!loading" class="text-center pt-1 mb-2 pb-1">
+                        <button
+                          (click)="onSubmit()"
+                          class="btn btn-primary gradient-custom-2 w-100"
+                        >
+                          Đăng nhập
+                        </button>
+                      </div>
+                      <div *ngIf="loading" class="text-center pt-1 mb-2 pb-1">
+                        <button
+                          disabled
+                          class="btn btn-primary gradient-custom-2 w-100 bg-secondary"
+                        >
+                          Đăng nhập
+                        </button>
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <div
+                          class="text-center alert alert-danger mb-2 w-100"
+                          *ngIf="error"
+                          >{{ error }}</div
+                        >
+                        <div
+                          class="text-center alert alert-success mb-2 w-100"
+                          *ngIf="successMess"
+                          >{{ successMess }}</div
+                        >
+                      </div>
+
+                      <div
+                        class="d-flex align-items-center justify-content-center pb-4 mt-3"
+                      >
+                        <p class="mb-0 me-2">Bạn chưa có tài khoản?</p>
+                        <a [routerLink]="['/register']">Đăng kí</a>
+                      </div>
+                    </form>
+                    <!-- google btn -->
+
+                    <div id="google-btn" class="w-100 d-flex text-center justify-content-center"></div>
+                  </div>
+                </div>
+                <div
+                  class="col-lg-7 d-flex align-items-center gradient-custom-2"
+                >
+                  <img
+                    class="w-100 h-100 object-fit-cover"
+                    src="assets/images/images/banner1.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- <script src="./src/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
