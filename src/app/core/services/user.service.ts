@@ -52,4 +52,17 @@ export class UserService {
       obj
     );
   }
+  sendEmailChangePassword(email:string): Observable<APIResponse> {
+    return this.http.post<APIResponse>(
+      Constant.API_URL + Constant.API_END_POINT.USER_SENDEMAILPASSWORD,
+      { email }
+    );
+  }
+  changeForgotPassword(password:string,token:string): Observable<APIResponse> {
+    return this.http.post<APIResponse>(
+      Constant.API_URL + Constant.API_END_POINT.USER_CHANGEFORGETPASSWORD,
+      { password,token }
+    );
+  }
+
 }

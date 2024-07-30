@@ -410,190 +410,69 @@
   <!-- tour suggestion -->
   <div class="container">
     <div class="text-primary-1 text-center pt-5 pb-4 fs-4 fw-bold">
-      Có thể Quý khách sẽ thích
+      Các Tour du lịch bạn đã xem gần đây
     </div>
     <div>
       <div class="row">
-        <div class="col-12 col-sm-6 col-xl-3 mb-4">
+        <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-4" *ngFor="let item of tourSeens |slice:0:4">
           <div class="card card-hover position-relative">
             <div class="position-absolute start-0 top-0 p-2">
-              <div class="bg-warning px-2 py-1 rounded-2 text-white fw-bold">
+              <div *ngIf="item.percent_sale>0" class="bg-warning px-2 py-1 rounded-2 text-white fw-bold">
                 Sale
               </div>
             </div>
             <div class="" style="height: 260px">
               <img
-                src="https://media.travel.com.vn/LastMinute/lm_240625050617_329382_BKK%20shopping%20mall.jpg"
+                src="{{item.thumnail}}"
                 class="card-img-top h-100 object-fit-cover"
-                alt="..."
+                alt="{{item.title}}"
               />
             </div>
             <div class="card-body">
-              <span class="fs-7">27/6/2024 - 5 ngày</span>
-              <h5 class="card-title text-primary-1 fw-bold mt-1 card-name">
-                <a href="./detail.html" class="text-primary-1"
-                  >Thái Lan: Bangkok - Pattaya (Vườn lan Nong Nooch, tặng Show
-                  Alcazar và Buffet tại BaiYoke Sky)</a
+              <span class="fs-7">{{item.date_start |formatdate}} - {{item.number_of_day}} ngày</span>
+              <h5 class="card-title text-primary fw-bold mt-1 card-name">
+                <a [routerLink]="['/tour',item.slug]" class="text-primary-1"
+                  >{{item.title}}</a
                 >
               </h5>
-              <span class="card-text fs-7">Nơi khởi hành: TP. Hồ Chí Minh</span>
-              <div class="mt-2"><del>Giá: 4.990.000 đ</del></div>
+              <span class="card-text fs-7"
+                >Nơi khởi hành: {{item.province_start.name}}</span
+              >
+              <div class="mt-2" style="height: 30px;"><del *ngIf="item.percent_sale >0">Giá: {{(item.price/(100-item.percent_sale)*100)|formatprice}} đ</del></div>
               <div class="d-flex text-warning justify-content-between">
-                <span class="fw-bold fs-5">Còn: 3.999.000 đ</span>
-                <div class="bg-warning text-light px-2 py-1 fs-7 rounded-4">
-                  9% GIẢM
+                <span class="fw-bold fs-5">{{item.percent_sale>0 ?'Còn':'Chỉ'}}: {{item.price|formatprice}} đ</span>
+                <div class="bg-warning text-light px-2 py-1 fs-7 rounded-4" *ngIf="item.percent_sale >0">
+                  {{item.percent_sale}}% GIẢM
                 </div>
               </div>
               <div class="d-flex justify-content-between gap-2 my-2">
-                <a href="#" class="btn btn-danger flex-1">Đặt ngay</a>
-                <a href="/detail.html" class="btn btn-outline-primary"
+                <a [routerLink]="['/booking',item.slug]"  class="btn btn-danger flex-1"
+                  >Đặt ngay</a
+                >
+                <a [routerLink]="['/tour',item.slug]" class="btn btn-outline-primary"
                   >Xem chi tiết</a
                 >
+              </div>
+              <div class="d-flex align-items-center justify-content-between mt-4">
+                <a href="#" class="fs-7 fw-bold text-primary">
+                  <i class="fa-solid fa-circle-plus"></i>
+                  <span>Thêm vào so sánh</span>
+                </a>
+                <div class="d-flex align-items-center gap-2">
+                  <div class="fs-7 fw-bold text-decoration-underline">
+                    Số chỗ còn
+                  </div>
+                  <span class="text-danger fw-bold fs-5">{{item.quantity}}</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-12 col-sm-6 col-xl-3 mb-4">
-          <div class="card card-hover position-relative">
-            <div class="position-absolute start-0 top-0 p-2">
-              <div class="bg-warning px-2 py-1 rounded-2 text-white fw-bold">
-                Sale
-              </div>
-            </div>
-            <div class="" style="height: 260px">
-              <img
-                src="https://media.travel.com.vn/LastMinute/lm_240625050617_329382_BKK%20shopping%20mall.jpg"
-                class="card-img-top h-100 object-fit-cover"
-                alt="..."
-              />
-            </div>
-            <div class="card-body">
-              <span class="fs-7">27/6/2024 - 5 ngày</span>
-              <h5 class="card-title text-primary-1 fw-bold mt-1 card-name">
-                <a href="./detail.html" class="text-primary-1"
-                  >Thái Lan: Bangkok - Pattaya (Vườn lan Nong Nooch, tặng Show
-                  Alcazar và Buffet tại BaiYoke Sky)</a
-                >
-              </h5>
-              <span class="card-text fs-7">Nơi khởi hành: TP. Hồ Chí Minh</span>
-              <div class="mt-2"><del>Giá: 4.990.000 đ</del></div>
-              <div class="d-flex text-warning justify-content-between">
-                <span class="fw-bold fs-5">Còn: 3.999.000 đ</span>
-                <div class="bg-warning text-light px-2 py-1 fs-7 rounded-4">
-                  9% GIẢM
-                </div>
-              </div>
-              <div class="d-flex justify-content-between gap-2 my-2">
-                <a href="#" class="btn btn-danger flex-1">Đặt ngay</a>
-                <a href="/detail.html" class="btn btn-outline-primary"
-                  >Xem chi tiết</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-sm-6 col-xl-3 mb-4">
-          <div class="card card-hover position-relative">
-            <div class="position-absolute start-0 top-0 p-2">
-              <div class="bg-warning px-2 py-1 rounded-2 text-white fw-bold">
-                Sale
-              </div>
-            </div>
-            <div class="" style="height: 260px">
-              <img
-                src="https://media.travel.com.vn/LastMinute/lm_240625050617_329382_BKK%20shopping%20mall.jpg"
-                class="card-img-top h-100 object-fit-cover"
-                alt="..."
-              />
-            </div>
-            <div class="card-body">
-              <span class="fs-7">27/6/2024 - 5 ngày</span>
-              <h5 class="card-title text-primary-1 fw-bold mt-1 card-name">
-                <a href="./detail.html" class="text-primary-1"
-                  >Thái Lan: Bangkok - Pattaya (Vườn lan Nong Nooch, tặng Show
-                  Alcazar và Buffet tại BaiYoke Sky)</a
-                >
-              </h5>
-              <span class="card-text fs-7">Nơi khởi hành: TP. Hồ Chí Minh</span>
-              <div class="mt-2"><del>Giá: 4.990.000 đ</del></div>
-              <div class="d-flex text-warning justify-content-between">
-                <span class="fw-bold fs-5">Còn: 3.999.000 đ</span>
-                <div class="bg-warning text-light px-2 py-1 fs-7 rounded-4">
-                  9% GIẢM
-                </div>
-              </div>
-              <div class="d-flex justify-content-between gap-2 my-2">
-                <a href="#" class="btn btn-danger flex-1">Đặt ngay</a>
-                <a href="/detail.html" class="btn btn-outline-primary"
-                  >Xem chi tiết</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-sm-6 col-xl-3 mb-4">
-          <div class="card card-hover position-relative">
-            <div class="position-absolute start-0 top-0 p-2">
-              <div class="bg-warning px-2 py-1 rounded-2 text-white fw-bold">
-                Sale
-              </div>
-            </div>
-            <div class="" style="height: 260px">
-              <img
-                src="https://media.travel.com.vn/LastMinute/lm_240625050617_329382_BKK%20shopping%20mall.jpg"
-                class="card-img-top h-100 object-fit-cover"
-                alt="..."
-              />
-            </div>
-            <div class="card-body">
-              <span class="fs-7">27/6/2024 - 5 ngày</span>
-              <h5 class="card-title text-primary-1 fw-bold mt-1 card-name">
-                <a href="./detail.html" class="text-primary-1"
-                  >Thái Lan: Bangkok - Pattaya (Vườn lan Nong Nooch, tặng Show
-                  Alcazar và Buffet tại BaiYoke Sky)</a
-                >
-              </h5>
-              <span class="card-text fs-7">Nơi khởi hành: TP. Hồ Chí Minh</span>
-              <div class="mt-2"><del>Giá: 4.990.000 đ</del></div>
-              <div class="d-flex text-warning justify-content-between">
-                <span class="fw-bold fs-5">Còn: 3.999.000 đ</span>
-                <div class="bg-warning text-light px-2 py-1 fs-7 rounded-4">
-                  9% GIẢM
-                </div>
-              </div>
-              <div class="d-flex justify-content-between gap-2 my-2">
-                <a href="#" class="btn btn-danger flex-1">Đặt ngay</a>
-                <a href="/detail.html" class="btn btn-outline-primary"
-                  >Xem chi tiết</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
+       
       </div>
 
-      <div class="d-flex justify-content-center pt-3">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+    
     </div>
   </div>
 </main>

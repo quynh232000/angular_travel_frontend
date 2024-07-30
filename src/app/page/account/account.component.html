@@ -52,7 +52,7 @@
             class="form-control"
             name="full_name"
             value="{{ user.full_name }}"
-            placeholder="Nguyen Van Quynh"
+            placeholder="Aa.."
             [(ngModel)]="userObj.full_name"
           />
         </div>
@@ -62,11 +62,11 @@
         <div class="col-sm-3">Số điện thoại</div>
         <div class="col-sm-9">
           <input
-            type="number"
+            type="string"
             name="phone_number"
             [(ngModel)]="userObj.phone_number"
             class="form-control"
-            placeholder="092332222"
+            placeholder="_"
             value="{{ user.phone_number }}"
           />
         </div>
@@ -80,7 +80,7 @@
             class="form-control"
             name="address"
             [(ngModel)]="userObj.address"
-            placeholder="Sg"
+            placeholder="Aa.."
             value="{{ user.address }}"
           />
         </div>

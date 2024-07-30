@@ -20,7 +20,7 @@ export class DetailComponent {
   tourdetail: TourModel = new TourModel();
   private slugSubscription: Subscription | null = null;
   isLogin: boolean = false;
-
+  tourSeens: TourModel[] = [];
   constructor(
     private TourService: TourService,
     private router: ActivatedRoute,
@@ -35,17 +35,20 @@ export class DetailComponent {
         this.isLogin = true;
       }
     });
-   
+    this.StoreService.suggesTours$.subscribe((suggesTours) => {
+      this.tourSeens = suggesTours;
+    });
 
     this.slugSubscription = this.router.paramMap.subscribe((params) => {
       const slug = params.get('slug');
       if (slug) {
         this.TourService.getDetailTour(slug).subscribe((res) => {
-         
-          
           if (res.status) {
             this.tourdetail = res.data;
             this.title.setTitle(res.data.title);
+
+            // set tour seen
+            this.StoreService.setSuggessTours(res.data);
           } else {
             console.log(res);
             this.route.navigateByUrl('/error');

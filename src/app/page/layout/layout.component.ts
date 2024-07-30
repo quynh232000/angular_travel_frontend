@@ -16,6 +16,7 @@ import { StoreService } from '../../core/services/store.service';
 export class LayoutComponent {
   isLogin: boolean = !!localStorage.getItem(Constant.TOKEN_KEY);
   user: UserModel = new UserModel();
+  count:number = 0
   constructor(
     private StoreService: StoreService,
     private router: Router
@@ -37,6 +38,9 @@ export class LayoutComponent {
         this.isLogin = false;
         this.user = new UserModel();
       }
+    });
+    this.StoreService.compareTours$.subscribe((data) => {
+      this.count =data.length
     });
 
   }

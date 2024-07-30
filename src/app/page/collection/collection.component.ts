@@ -11,6 +11,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormatdatePipe } from '../../shared/pipes/formatdate.pipe';
 import { FormatpricePipe } from '../../shared/pipes/formatprice.pipe';
 import { FormsModule } from '@angular/forms';
+import { StoreService } from '../../core/services/store.service';
 
 @Component({
   selector: 'app-collection',
@@ -36,9 +37,7 @@ export class CollectionComponent {
   listTours: TourModel[] = [new TourModel()];
   meta: MetaResponse = new MetaResponse();
  
-
-  
-  constructor(private TourService: TourService,private route:ActivatedRoute) {}
+  constructor(private TourService: TourService,private route:ActivatedRoute,private StoreService: StoreService) {}
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
        if(params['type']){
@@ -101,5 +100,9 @@ export class CollectionComponent {
     this.dataFilter.page = 1;
     this.getTours();
   }
+
+  addCompare(tour:TourModel){
+    this.StoreService.setCompareTours(tour)
+}
  
 }

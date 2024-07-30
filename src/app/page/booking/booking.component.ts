@@ -66,10 +66,6 @@ export class BookingComponent {
     this.title.setTitle('Quin - Booking');
   }
   ngOnInit(): void {
-
-    
-
-
     this.StoreService.login$.subscribe((isLogin) => {
       if (isLogin) {
         this.isLogin = true;
@@ -112,8 +108,6 @@ export class BookingComponent {
     }
 
     this.slugSubscription = this.router.paramMap.subscribe((params) => {
-     
-
       // get detail
       const slug = params.get('slug');
       if (slug) {
@@ -127,7 +121,7 @@ export class BookingComponent {
               ].date;
 
             this.orderObj.tour_id = this.tourdetail.id;
-            this.checkResultPayment()
+            this.checkResultPayment();
           } else {
             console.error('Error get tour detail:', res.message);
             this.route.navigate(['/error']);
@@ -137,24 +131,28 @@ export class BookingComponent {
     });
   }
 
-  checkResultPayment(){
+  checkResultPayment() {
     // check payment
-    this.router.queryParams.subscribe(params => {
+    this.router.queryParams.subscribe((params) => {
       const checkPayment = params['vnp_SecureHash'];
-      if(checkPayment){
+      if (checkPayment) {
         this.isCheckPayment = true;
         const fullPath = this.location.path();
-        this.TourService.orderVnpayResult(fullPath.split('?')[1],this.orderObj).subscribe(res=>{
-          console.log(res);
-          this.isCheckPayment= false
-          if(res.status){
-            this.route.navigate(['/ordersuccess'],{queryParams:{order_id:res.data.id}})
-          }else{
-            this.errorMess = res.message
+        this.TourService.orderVnpayResult(
+          fullPath.split('?')[1],
+          this.orderObj
+        ).subscribe((res) => {
+          this.isCheckPayment = false;
+          if (res.status) {
+            this.route.navigate(['/ordersuccess'], {
+              queryParams: { order_id: res.data.id },
+            });
+          } else {
+            this.errorMess = res.message;
           }
-        })
+        });
       }
-  })
+    });
   }
   ngOnDestroy(): void {
     if (this.slugSubscription) {
@@ -275,14 +273,20 @@ export class BookingComponent {
     }
 
     this.loading = true;
-
+    this.isCheckPayment = true;
     if (this.payment_type == 'COD') {
       this.TourService.order(this.orderObj).subscribe((res) => {
         this.loading = false;
+        this.isCheckPayment = false;
         if (res.status) {
           this.successMess =
             'Đặt tour thành công! Vui lòng check email của bạn để xác nhận đơn hàng.';
           this.orderObj = new OrderModel();
+          this.route.navigate(['/ordersuccess'], {
+            queryParams: { order_id: res.data.id },
+          });
+        } else {
+          this.errorMess = res.message;
         }
       });
     } else {

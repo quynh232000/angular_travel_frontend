@@ -14,6 +14,9 @@ import { AccountComponent } from './page/account/account.component';
 import { OrderhistroyComponent } from './page/orderhistroy/orderhistroy.component';
 import { SercurityComponent } from './page/sercurity/sercurity.component';
 import { OrdersuccessComponent } from './page/ordersuccess/ordersuccess.component';
+import { ForgotpasswordComponent } from './page/forgotpassword/forgotpassword.component';
+import { ChangepasswordComponent } from './page/changepassword/changepassword.component';
+import { CartComponent } from './page/cart/cart.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +26,14 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'forgotpassword',
+    component: ForgotpasswordComponent,
+  },
+  {
+    path: 'changepassword/:token',
+    component: ChangepasswordComponent,
   },
   {
     path: '',
@@ -51,6 +62,10 @@ export const routes: Routes = [
       {
         path: 'news/:slug',
         component: NewsComponent,
+      },
+      {
+        path: 'cart',
+        component: CartComponent,
       },
       {
         path: 'error',

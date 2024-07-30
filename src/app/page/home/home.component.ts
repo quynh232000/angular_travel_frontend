@@ -8,6 +8,8 @@ import { FormatdatePipe } from '../../shared/pipes/formatdate.pipe';
 import { TourService } from '../../core/services/tour.service';
 import { FormatpricePipe } from '../../shared/pipes/formatprice.pipe';
 import { FormsModule } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
+import { StoreService } from '../../core/services/store.service';
 
 @Component({
   selector: 'app-home',
@@ -37,8 +39,12 @@ export class HomeComponent implements AfterViewInit {
   constructor(
     private NewsService: NewsService,
     private TourService: TourService,
-    private route:Router
-  ) {}
+    private route:Router,
+    private title:Title,
+    private StoreService: StoreService
+  ) {
+    this.title.setTitle('Quin Travel - Dịch vụ du lịch');
+  }
 
   ngOnInit(): void {
     // get all province
@@ -125,5 +131,8 @@ export class HomeComponent implements AfterViewInit {
     if(this.type !="" && this.province_start_id !="" && this.province_end_id !="" && this.date_start !=""){
       this.route.navigate(['/collection'], { queryParams: { type: this.type,start:this.province_start_id,end:this.province_end_id,date:this.date_start} })
     }
+  }
+  addCompare(tour:TourModel){
+      this.StoreService.setCompareTours(tour)
   }
 }

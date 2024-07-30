@@ -68,12 +68,12 @@
                       {{ item.order_detail[0].product.number_of_day }} ngày
                     </div>
                   </div>
-                  <div class="d-flex gap-2">
+                  <!-- <div class="d-flex gap-2">
                     <div>Nơi khởi hành:</div>
                     <div class="fw-bold">
-                      {{ item.order_detail[0].product.province_start?.name }}
+                      {{ item.order_detail[0].product && item.order_detail[0].product.province_start.name? item.order_detail[0].product.province_start.name :"--" }}
                     </div>
-                  </div>
+                  </div> -->
                   <div class="d-flex gap-2">
                     <div>Dòng tour:</div>
                     <div class="fw-bold">
@@ -93,8 +93,8 @@
                       </div>
                       <div class="text-primary">
                         {{
-                          item.order_detail[0].price *
-                            item.order_detail[0].quantity | formatprice
+                          +item.order_detail[0].price *
+                            +item.order_detail[0].quantity | formatprice
                         }}
                         đ
                       </div>
@@ -112,8 +112,8 @@
                       </div>
                       <div class="text-primary">
                         {{
-                          item.order_detail[0].price *
-                            item.order_detail[0].quantity_child | formatprice
+                          +item.order_detail[0].price *
+                            +item.order_detail[0].quantity_child | formatprice
                         }}
                         đ
                       </div>
@@ -131,8 +131,8 @@
                       </div>
                       <div class="text-primary">
                         {{
-                          item.order_detail[0].price_baby *
-                            item.order_detail[0].quantity_baby | formatprice
+                          +item.order_detail[0].price_baby *
+                            +item.order_detail[0].quantity_baby | formatprice
                         }}
                         đ
                       </div>
@@ -154,13 +154,13 @@
                     </div>
                     <div class="fw-bold">
                       {{
-                        item.order_detail[0].price *
-                          item.order_detail[0].quantity +
-                          item.order_detail[0].price *
-                            item.order_detail[0].quantity_child +
-                          item.order_detail[0].price_baby *
-                            item.order_detail[0].quantity_baby +
-                          item.order_detail[0].additional_fee | formatprice
+                        +item.order_detail[0].price *
+                          +item.order_detail[0].quantity +
+                          +item.order_detail[0].price *
+                            +item.order_detail[0].quantity_child +
+                          +item.order_detail[0].price_baby *
+                            +item.order_detail[0].quantity_baby +
+                          +item.order_detail[0].additional_fee | formatprice
                       }}
                       đ
                     </div>
@@ -171,10 +171,10 @@
             <div class="row mt-2">
               <div
                 class="col-12 alert  alert-{{
-                  item.payment_status ? 'success' : 'warning'
+                  item.payment_status ==1 ? 'success' : 'warning'
                 }} text-center fw-bold"
               >
-                {{ item.payment_status ? "Đã thanh toán" : "Chưa thanh toán" }}
+                {{ item.payment_status ==1 ? "Đã thanh toán" : "Chưa thanh toán" }}
               </div>
             </div>
           </div>
