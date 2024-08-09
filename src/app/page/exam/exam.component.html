@@ -1,0 +1,278 @@
+<div>
+  <header class="container">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid d-flex">
+        <a class="navbar-brand" href="#">
+          <img
+            width="76"
+            class="object-fit-cover"
+            src="https://nemvanthanh.vn/wp-content/themes/NEMVANTHANH/assets/images/logo/logo.svg"
+            alt=""
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-1" id="navbarNav">
+          <ul class="navbar-nav d-flex justify-content-end w-100">
+            <li class="nav-item border-end fw-bold fs-6">
+              <a class="nav-link active py-0 px-2" aria-current="page" href="#"
+                >GIỚI THIỆU</a
+              >
+            </li>
+            <li class="nav-item border-end fw-bold fs-6">
+              <a
+                class="nav-link active py-0 px-2 text-danger"
+                aria-current="page"
+                href="#"
+                >SẢN PHẨM</a
+              >
+            </li>
+            <li class="nav-item border-end fw-bold fs-6">
+              <a class="nav-link active py-0 px-2" aria-current="page" href="#"
+                >TIN TỨC</a
+              >
+            </li>
+            <li class="nav-item border-end fw-bold fs-6">
+              <a class="nav-link active py-0 px-2" aria-current="page" href="#"
+                >kÊNH PHÂN PHỐI</a
+              >
+            </li>
+            <li class="nav-item border-end fw-bold fs-6">
+              <a class="nav-link active py-0 px-2" aria-current="page" href="#"
+                >HỖ TRỢ</a
+              >
+            </li>
+            <li class="nav-item border-end fw-bold fs-6">
+              <a class="nav-link active py-0 px-2" aria-current="page" href="#"
+                >CATELOG</a
+              >
+            </li>
+            <li
+              class="nav-item border border-primary fw-bold fs-6 rounded-2 ms-4"
+            >
+              <a class="nav-link active py-0 px-2" aria-current="page" href="#">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </a>
+            </li>
+            <li
+              class="nav-item border border-primary fw-bold fs-6 rounded-2 ms-2"
+            >
+              <a
+                href=""
+                type="button"
+                class="nav-link active py-0 px-2 bg-primary position-relative text-white"
+              >
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                >
+                  3
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              </a>
+            </li>
+            <li class="nav-item border-start fw-bold fs-6 ms-4">
+              <a
+                class="nav-link active py-0 px-2 d-flex gap-2"
+                aria-current="page"
+                href="#"
+              >
+                <img
+                  class="object-fit-cover"
+                  src="https://nemvanthanh.vn/wp-content/plugins/sitepress-multilingual-cms/res/flags/en.png"
+                  alt=""
+                />
+                <span>END</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="position-relative">
+    <img
+      src="https://nemvanthanh.vn/wp-content/uploads/2020/05/banner-sub-cao-su.jpg"
+      alt=""
+    />
+    <div
+      style="background-color: rgba(36, 36, 36, 0.5)"
+      class="position-absolute top-0 end-0 start-0 bottom-0 d-flex flex-column justify-content-center align-items-center"
+    >
+      <h2 class="text-white">NỆM CAO SU</h2>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb text-white">
+          <li class="breadcrumb-item">
+            <a class="text-white" href="#">TRANG CHỦ</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a class="text-white" href="#">SẢN PHẨM</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a class="text-white" href="#">NỆM</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a class="text-white" href="#">NỆM CAO SU</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <main class="container py-5">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="border-bottom fw-bold pb-2">TÌM KIẾM SẢN PHẨM</div>
+        <form class="py-3">
+          <input
+            type="text"
+            name="search"
+            [(ngModel)]="search"
+            (change)="handleSearch()"
+            placeholder="Nhập tên sản phẩm"
+            class="form-control"
+          />
+        </form>
+        <div class="border-bottom fw-bold pb-2">Bộ lọc</div>
+        <div class="d-flex align-items-center py-3">
+          <input placeholder="From" type="text" class="form-control" />
+          <span class="mx-3">-</span>
+          <input placeholder="To" type="text" class="form-control" />
+          <span class="ms-2">VND</span>
+        </div>
+        <div class="py-2">
+          <input type="range" class="form-range" id="customRange1" />
+          <div class="d-flex justify-content-between">
+            <small>0</small>
+            <small>15.000.000 đ</small>
+          </div>
+        </div>
+
+        <div class="border-bottom fw-bold py-2">Filter</div>
+        <div>
+          <div class="d-flex justify-content-between py-2">
+            <span>(8)</span>
+            <div>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between py-2">
+            <span>(8)</span>
+            <div>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between py-2">
+            <span>(8)</span>
+            <div>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-bottom fw-bold py-2">Chất liệu</div>
+        <div class="py-2">
+          <div class="text-gray fs-6">Cao su thiên nhiên (4)</div>
+          <div class="text-gray fs-6">Vải Caton (4)</div>
+          <div class="text-gray fs-6">Vải Gấm Damask (1)</div>
+        </div>
+
+        <div class="border-bottom fw-bold py-2">ĐỘ DÀY</div>
+        <div class="my-2">
+          <div class="text-gray fs-6">3cm (4)</div>
+          <div class="text-gray fs-6">Vải Caton (4)</div>
+          <div class="text-gray fs-6">Vải Gấm Damask (1)</div>
+        </div>
+
+        <div class="border-bottom fw-bold py-2">DANH MỤC SẢN PHẨM</div>
+        <div class="py-2 d-flex flex-column gap-2">
+          <a href="" class="text-black fw-bold fs-7">NỆM</a>
+          <a href="" class="text-black fw-bold fs-7">NỆM</a>
+          <a href="" class="text-black fw-bold fs-7"
+            >SẢN PHẨM DỊCH VỤ CÔNG NGHIỆP</a
+          >
+          <a href="" class="text-black fw-bold fs-7">NỆM</a>
+          <a href="" class="text-black fw-bold fs-7">DÂY THUN</a>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div
+          style="background-color: rgba(22, 22, 24, 0.12)"
+          class="d-flex justify-content-between p-2 align-items-center"
+        >
+          <span>Hiển thị tất cả 6 sản phẩm</span>
+          <select
+            class="form-select form-select-sm w-fit"
+            aria-label="Small select example"
+            [(ngModel)]="sort"
+            (change)="handleSort()"
+          >
+            <option value="">Lọc theo</option>
+            <option value="price">Giá tăng dần</option>
+            <option value="-price">Giá giảm dần</option>
+           
+          </select>
+        </div>
+
+        <div class="row py-4">
+          <div class="col-md-4 mb-4" *ngFor="let item of products">
+            <div class="card">
+              <div class="card-body">
+                <div>
+                  <h5 class="card-title text-center fw-bold text-primary1">
+                    {{ item.name }}
+                  </h5>
+                  <div
+                    class="d-flex justify-content-center text-gray fs-7 pt-2 pb-3"
+                  >
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                  <div class="fw-bold text-primary text-center">
+                    {{ item.price | number }} VND
+                  </div>
+                </div>
+                <div class="" style="height: 230px">
+                  <img
+                    src="{{ item.image }}"
+                    class="card-img-top h-100 object-fit-cover"
+                    alt="..."
+                  />
+                </div>
+
+                <a href="#" class="btn btn-primary w-100"
+                  ><i class="fa-solid fa-cart-plus"></i
+                  ><span>Thêm vào giỏ hàng</span></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

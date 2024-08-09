@@ -18,7 +18,7 @@
         class="col-8 d-flex justify-content-end text-light nav-laptop d-none d-md-flex"
       >
         <a
-          href=""
+          [routerLink]="['/contact']"
           class="btn btn-outline-primary border-0 hover-bg-0 text-light d-flex hover-bg-hover-1 d-flex align-items-center gap-2"
         >
           <div class="fw-medium">Liên hệ</div>
@@ -139,7 +139,7 @@
 
         <div class="d-none gap-2 d-md-flex">
           <a
-            [routerLink]="['/collection']"
+            [routerLink]="['/feature']"
             class="text-light fs-7 d-flex align-items-center gap-2 hover-bg-hover-1 w-fit p-2 rounded-5 px-3"
           >
             <i class="fa-solid fa-plane"></i>
@@ -147,8 +147,7 @@
           </a>
 
           <a
-            [routerLink]="['/collection']"
-            [queryParams]="{ category: 'hotel' }"
+            [routerLink]="['/feature']"
             class="text-light fs-7 d-flex align-items-center gap-2 hover-bg-hover-1 w-fit p-2 rounded-5 px-3"
           >
             <i class="fa-solid fa-hotel"></i>
@@ -156,7 +155,7 @@
           </a>
 
           <a
-            [routerLink]="['/collection']"
+            [routerLink]="['/feature']"
             class="text-light fs-7 d-flex align-items-center gap-2 hover-bg-hover-1 w-fit p-2 rounded-5 px-3"
           >
             <i class="fa-solid fa-car"></i>
@@ -164,7 +163,7 @@
           </a>
 
           <a
-            [routerLink]="['/collection']"
+            [routerLink]="['/feature']"
             class="text-light fs-7 d-flex align-items-center gap-2 hover-bg-hover-1 w-fit p-2 rounded-5 px-3"
           >
             <i class="fa-regular fa-bookmark"></i>

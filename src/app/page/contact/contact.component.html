@@ -1,0 +1,172 @@
+<div style="margin-top: 100px">
+  <div class="container">
+    <h4 class="text-center fw-bold text-primary-1 py-3 fs-3">LIÊN HỆ</h4>
+    <div class="row">
+      <div class="col-md-8 m-auto fs-6 fw-bold text-primary-1 text-center">
+        Để có thể đáp ứng được các yêu cầu và đóng góp ý kiến của quý khách, xin
+        vui lòng gửi thông tin hoặc gọi đến hotline các chi nhánh bên dưới để
+        liên hệ một cách nhanh chóng
+      </div>
+    </div>
+    <div class="py-5">
+      <div class="row">
+        <div class="col-md-7 pe-5">
+          <div class="fw-bold fs-5 mb-4">THÔNG TIN LIÊN LẠC</div>
+          <div *ngIf="mess_success" class="alert alert-success">
+            <div class="text-success fs-1 text-center mb-2">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="fw-bold text-success text-center">Thông tin liên hệ của bạn đã được gửi đi. chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất! Thân ái.</div>
+          </div>
+          <div *ngIf="!mess_success">
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <label for="" class="form-label fw-bold"
+                  >Họ tên <span class="text-danger fw-bold">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="name"
+                  [(ngModel)]="name"
+                  placeholder="Nhập họ tên"
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="" class="form-label fw-bold"
+                  >Email <span class="text-danger fw-bold">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="email"
+                  [(ngModel)]="email"
+                  placeholder="Nhập email"
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="" class="form-label fw-bold"
+                  >Điện thoại <span class="text-danger fw-bold">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="phone"
+                  [(ngModel)]="phone"
+                  placeholder="Nhập số điện thoại"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <label for="" class="form-label fw-bold">Địa chỉ</label>
+                <input
+                  class="form-control"
+                  rows="4"
+                  name="address"
+                  [(ngModel)]="address"
+                  placeholder="Nhập địa chỉ"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <label for="" class="form-label fw-bold"
+                  >Tiêu đề <span class="text-danger fw-bold">*</span></label
+                >
+                <input
+                  class="form-control"
+                  [(ngModel)]="title"
+                  name="title"
+                  placeholder="Nhập tiêu đề"
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <label for="" class="form-label fw-bold"
+                  >Nội dung <span class="text-danger fw-bold">*</span></label
+                >
+                <textarea
+                  class="form-control"
+                  name="content"
+                  [(ngModel)]="content"
+                  rows="4"
+                  placeholder="Nhập nội dung"
+                ></textarea>
+              </div>
+            </div>
+
+            <div *ngIf="mess_error && mess_error !=''">
+              <div class="alert alert-danger py-2">{{mess_error}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 d-flex justify-content-center pt-3">
+                <button type="submit" class="btn btn-primary btn-block w-100" (click)="onSubmit()">
+                  Gửi ngay
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+            <div class="fw-bold fs-5 mb-4">CHI NHÁNH</div>
+            <div style="background-color: #f8f8f8;" class="p-3">
+                <div class="border-bottom pb-3">
+                    <button class="btn btn-primary rounded-5 btn-sm me-2">TP.Hồ Chí Minh</button>
+                    <button class="btn btn-outline-primary rounded-5 btn-sm me-2">TP.Đà Nẵng</button>
+                    <button class="btn btn-outline-primary rounded-5 btn-sm me-2">TP.Hà Nội</button>
+                </div>
+                <div>
+                    <div class="fw-bold py-3">TRỤ SỞ CHÍNH</div>
+                    <div>
+                        <div class="d-flex gap-1 mb-1">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <small>190 Pasteur, P. Võ Thị Sáu, Q.3, Tp. Hồ Chí Minh, Việt Nam</small>
+                        </div>
+                        <div class="d-flex gap-1 mb-1">
+                            <i class="fa-solid fa-phone"></i>
+                            <small>Hotline: 0358723520 (Mr.Quynh)</small>
+                        </div>
+                        <div class="d-flex gap-1 mb-1">
+                            <i class="fa-regular fa-envelope"></i>
+                            <small>Email: quynh232000(a)grmail.com</small>
+                        </div>
+                    </div>
+
+                    <div class="fw-bold py-3">PHÒNG ĐĂNG KÝ DU LỊCH PHÚ MỸ HƯNG</div>
+                    <div>
+                        <div class="d-flex gap-1 mb-1">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <small>1481 Nguyễn Văn Linh, KP Mỹ Toàn 1, P.Tân Phong, Q.7, TP.HCM</small>
+                        </div>
+                        <div class="d-flex gap-1 mb-1">
+                            <i class="fa-solid fa-phone"></i>
+                            <small>Hotline: 0358723520 (Mr.Quynh)</small>
+                        </div>
+                        <div class="d-flex gap-1 mb-1">
+                            <i class="fa-regular fa-envelope"></i>
+                            <small>Email: quynh232000(a)grmail.com</small>
+                        </div>
+                    </div>
+
+                    <div class="fw-bold py-3">XÍ NGHIỆP VẬN CHUYỂN XUYÊN Á</div>
+                    <div>
+                        <div class="d-flex gap-1 mb-1">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <small>1481 Nguyễn Văn Linh, KP Mỹ Toàn 1, P.Tân Phong, Q.7, TP.HCM</small>
+                        </div>
+                        <div class="d-flex gap-1 mb-1">
+                            <i class="fa-solid fa-phone"></i>
+                            <small>Hotline: 0358723520 (Mr.Quynh)</small>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

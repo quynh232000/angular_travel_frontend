@@ -17,6 +17,10 @@ import { OrdersuccessComponent } from './page/ordersuccess/ordersuccess.componen
 import { ForgotpasswordComponent } from './page/forgotpassword/forgotpassword.component';
 import { ChangepasswordComponent } from './page/changepassword/changepassword.component';
 import { CartComponent } from './page/cart/cart.component';
+import { TestComponent } from './page/test/test.component';
+import { ExamComponent } from './page/exam/exam.component';
+import { FeatureComponent } from './page/feature/feature.component';
+import { ContactComponent } from './page/contact/contact.component';
 
 export const routes: Routes = [
   {
@@ -27,6 +31,15 @@ export const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
   },
+  {
+    path: 'test',
+    component: TestComponent,
+  },
+  {
+    path: 'exam',
+    component: ExamComponent,
+  },
+
   {
     path: 'forgotpassword',
     component: ForgotpasswordComponent,
@@ -71,6 +84,14 @@ export const routes: Routes = [
         path: 'error',
         component: NotfoundComponent
         ,
+      },
+      {
+        path: 'feature',
+        component: FeatureComponent,
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
       },
       {
         path: 'ordersuccess',

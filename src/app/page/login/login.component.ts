@@ -7,7 +7,7 @@ import { UserService } from '../../core/services/user.service';
 import { LoginModel, WithGoogleModel } from '../../core/models/API.Model';
 import { FormsModule } from '@angular/forms';
 import { StoreService } from '../../core/services/store.service';
-
+import * as Yup from 'yup';
 @Component({
   selector: 'app-login',
   standalone: true,
